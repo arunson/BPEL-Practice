@@ -1,0 +1,142 @@
+/*
+    Document   : nblaf.css
+    Created on : Oct 5, 2009, 10:22:52 AM
+    Author     : Petr Chytil <petr.chytil@sun.com>
+    Description: netbeans.org fixes
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+.f-page-auto-cell{
+    padding: 0px;
+}
+
+ul li {
+    margin-bottom:5px;
+    margin-top:0;
+}
+
+#main .content {
+    overflow:hidden;
+    position:relative;
+    width:769px;
+}
+
+#container {
+/*width:880px;*/
+}
+
+#main {
+    margin:0 0px;
+    width:770px;
+}
+
+#main-content{
+    padding: 1px 2px;
+}
+
+#main-content table tr th, #main table tr td{
+    text-align: left;
+}
+
+#page-border {
+    width:1005px;
+}
+
+#fixfluid-footer {
+    width:1007px;
+    background-image:url("/images_www/v6/footer-floating-bg.png");
+    background-repeat:repeat-x;
+    height:36px;
+    margin-bottom:5px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-top:0;
+}
+
+table tr th, table tr td {
+    padding: 0px 0px;
+}
+
+.content .home .column {
+    min-height:200px;
+    padding-right:15px;
+    width:315px;
+}
+
+.blockList ul li {
+    margin-bottom:0px;
+    margin-top:0px;
+    line-height:140%;
+}
+
+.blockList .info {
+    display:block;
+    float:left;
+    margin:0 20px 11px;
+    width:400px;
+}
+
+h2.pageTitle {
+    font-style:normal;
+}
+
+h3.subSection {
+    font-style:normal;
+}
+
+.wikiMainBody h1, h2, h3, h4, h5, h6{
+    line-height: 100%;
+}
+
+.vAccTextField {
+    height:2em;
+}
+
+/* IE fix for mailing lists - MIGRATION_TOOLS-60 */
+.mailingLists {
+    margin-top:30px;
+    width: 729px;
+    _margin-left: -56px;
+}
+
+table.dataDisplay {
+    width: 729px;
+}
+
+.will-paginate table {
+    width:100%;
+}
+
+.rcol ul {
+    margin-bottom:15px;
+    padding-left:5px;
+}
+
+.f-page-cell {    
+    padding-bottom:10px;
+}
+
+
+/* fix for empty space in right navigation bar - MIGRATION_TOOLS-186 */
+.vAccordion {
+    padding:15px;
+    border-bottom:1px solid #ADADAD;    
+}
+
+/* add some space around text to the "privacy" box in right navigation bar on
+ * the signup page */
+div#col-right-context div.title {
+    font-weight:bold;
+    padding:10px;
+}
+
+div#col-right-context div.bucket {
+    padding-left:15px;
+    padding-right:15px;
+    border-bottom:1px solid #ADADAD; 
+}

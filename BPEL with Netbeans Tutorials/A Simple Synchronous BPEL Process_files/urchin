@@ -1,0 +1,141 @@
+<html><!-- #BeginTemplate "/Templates/main.dwt" -->
+<head>
+<!-- #BeginEditable "doctitle" -->
+<title>404 错误 - Java 编程资料牛鼻站</title>
+<meta name="keywords" content="404 错误, Java 编程资料牛鼻站" >
+<meta name="description" content="404 错误, 您要的页面不存在 - Java 编程资料牛鼻站">
+<!-- #EndEditable --> 
+<meta name="robots" content="all">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="http://www.javanb.com/img/skin/style1.css" type=text/css rel=stylesheet>
+</head>
+
+<body bgcolor="#FFFFFF"><div id=bd align="center">
+
+<!-- begin: 头部导航 -->
+<div id=tp>
+<div id=tp_l>
+<div id=tp_lt><a href="http://www.javanb.com" title="Java 编程资料牛鼻网, Java 程序员论坛, Java 编程资料" class=nobd><img src="http://www.javanb.com/img/site/javanb.gif" width=250 height=60 border=0 title="Java 编程资料牛鼻网"></a></div>
+</div>
+<div id=tp_r>
+<div id=tp_rt>
+<!-- #BeginEditable "top468" -->
+<script type="text/javascript"><!--
+google_ad_client = "pub-5801877696325956";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text_image";
+//2007-05-10: JavaNB_Misc_468x60
+google_ad_channel = "5495560602";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "776655";
+google_color_text = "000000";
+google_color_url = "776655";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<!-- #EndEditable --> 
+</div>
+</div>
+</div>
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TR><TD><DIV id=Nav>
+<DIV class=ltab><DIV class="tabContent selected"><A href="http://www.javanb.com">首页</A></DIV></DIV>
+<DIV class=tab><DIV class=tabContent><A href="http://www.javanb.com/bbs/">论坛</A></DIV></DIV>
+<DIV class=tab><DIV class=tabContent><A href="http://book.javanb.com">图书</A></DIV></DIV>
+<DIV class=tab><DIV class=tabContent><A href="http://www.javanb.com/index-doc.html">开发资料</A></DIV></DIV>
+<DIV class=tab><DIV class=tabContent><A href="http://doc.javanb.com">在线文档</A></DIV></DIV>
+<DIV class=tab><DIV class=tabContent><A href="http://url.javanb.com">网址</A></DIV></DIV>
+<DIV class=tab><DIV class=tabContent><A href="http://download.javanb.com">下载</A></DIV></DIV>
+<DIV class=rtab><DIV class=tabContent><A href="http://www.javanb.com/contact.html">联系我们</A></DIV></DIV>
+</DIV></TD></TR>
+<TR><TD height=5 id=NavLn></TD></TR>
+</TABLE>
+<!-- end: 头部导航 -->
+
+<!-- end: 头部导航 -->
+
+<!-- #BeginEditable "topgg" -->
+
+<!-- begin: search box -->
+<div id="topad">
+<form method="get" action="http://www.javanb.com/ggres.php" target="_top">
+<!-- SiteSearch Google -->
+<b>站内搜索</b>: 请输入搜索关键词 
+<input type="hidden" name="domains" value="www.javanb.com" >
+<input type="text" name="q" size="31" maxlength="255" value="" id="sbi" class="inputclass">
+<input type="submit" name="sa" value="搜索" id="sbb" class="buttonclass">
+<input type="hidden" name="sitesearch" value="www.javanb.com">
+<input type="hidden" name="client" value="pub-5801877696325956">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="channel" value="0487632749">
+<input type="hidden" name="ie" value="GB2312">
+<input type="hidden" name="oe" value="GB2312">
+<input type="hidden" name="cof" value="GALT:#0000aa;GL:1;DIV:#FFFFFF;VLC:0000ff;AH:center;BGC:FFFFFF;LBGC:F7EFD8;ALC:0000ff;LC:0000ff;T:000000;GFNT:0000ff;GIMP:0000ff;FORID:11">
+<input type="hidden" name="hl" value="zh-CN">
+<!-- SiteSearch Google -->
+</form>
+</div>
+<!-- end: search box -->
+
+<!-- begin: 广告1 -->
+<div id=topad>
+<script type="text/javascript"><!--
+google_ad_client = "pub-5801877696325956";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text_image";
+//2007-05-10: JavaNB_Misc_728x90
+google_ad_channel = "5511513114";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "776655";
+google_color_text = "000000";
+google_color_url = "776655";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<!-- end: 广告1 -->
+
+<!-- begin: 广告2 --> <!-- div id="topad">顶部广告2</div --> <!-- end: 广告2 -->
+<!-- #EndEditable --> 
+
+
+<!-- #BeginEditable "textbody" -->
+<!-- begin: 正文 -->
+<div class="abody">
+<h1>404 错误: 您要的页面不存在</h1>
+<br>
+<br>
+<b>抱歉, 您所查看的页面不存在.</b> <br>
+<br>
+ <br>
+<br>
+ <br>
+<br>
+</div>
+<!-- end: 正文 --> 
+<!-- #EndEditable --> 
+
+<!-- begin: footer --> 
+<div id=footer><center>
+<a href="http://www.javanb.com/index.html">首页</a> | 
+<a href="http://www.javanb.com/java-sitemap-bd.html">全站 Sitemap</a> | 
+<a href="http://www.javanb.com/contact.html">联系我们</a> | 
+<a href="#" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.javanb.com/');return(false);">设为首页</a> | 
+<a href="#" onclick="window.external.AddFavorite('http://www.javanb.com/', 'Java 编程资料牛鼻站');return false;">收藏本站</a> 
+<br>版权所有 Copyright &copy; 2006-2007, Java 编程资料牛鼻站, All rights reserved <br> &nbsp; 
+</center></div>
+<!-- end: footer --> 
+
+</div>
+</body><!-- #EndTemplate --></html>

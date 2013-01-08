@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0061)http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Developer Guide to the BPEL Designer</title>
+      
+      <meta name="description" content="Developer Guide to the BPEL Designer">
+     <link rel="stylesheet" type="text/css" href="./Developer Guide to the BPEL Designer_files/netbeans.css" media="screen">
+      <meta name="author" content="Dmitry Markovski">
+<style type="text/css"></style></head>
+  <body>
+    <a name="top"></a>
+    <h1>
+       Developer Guide to the BPEL Designer
+    </h1>
+<div class="articledate" style="margin-left: 0px;font-style:italic;">
+<p>Contributed by <a href="mailto:Bob.May@Sun.COM">Bob May</a>, maintained by <a href="mailto:Irina.Filippova@Sun.COM">Irina Filippova</a><br>
+December 2007<br>
+<br>
+</p>
+</div>
+    <p><img src="./Developer Guide to the BPEL Designer_files/netbeans-stamp.gif" align="right" alt="Content on this page applies to NetBeans IDE 6.0" title="Content on this page applies to the NetBeans IDE 6.0" border="0" height="45" width="206">This document describes the features of the BPEL Designer, which is part of the SOA pack of  NetBeans IDE 6.0. It explains basic editing, compilation, deployment and test running of BPEL processes.</p>
+    <h2>
+       Contents
+    </h2>
+    <ul>
+      <li>
+        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-overview.html">Overview</a>
+          <ul>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-overview.html#using">Overview of the JBI Runtime Environment</a></li>
+            <li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-overview.html#bpelse">The BPEL Service Engine</a> </li>
+            <li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-overview.html#composite_app">The Composite Application Project</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-project.html">The BPEL Module Project</a>
+          <ul>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-project.html#understand">Understanding the BPEL Module Project</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-project.html#createnew">Creating a  BPEL Module Project</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-project.html#jbideploy">Creating a Composite Application Project </a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-project.html#deploy">Deploying a Composite Application Project</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-project.html#createsample">Creating Sample Processes in the BPEL Designer</a>            </li>
+          </ul>
+      </li>
+      <li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-views.html">The BPEL Design and Source View</a>
+          <ul>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-views.html#und_views">Understanding the  Design and Source View</a> </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-views.html#navigator">The Navigator</a> </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-views.html#designer">Working in the Design View</a></li>
+          </ul>
+      </li>
+      <li>
+        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-mapper.html">The BPEL Mapper</a>
+                <ul>
+                    <li>
+                        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-mapper.html#about">About the BPEL Mapper</a>                    </li>
+                    <li>
+                        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-mapper.html#mapper_mappings">Creating BPEL Mappings</a>                    </li>
+                    <li>
+                        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-mapper.html#mapper_predicates">Working with Predicates</a>                    </li>
+                    <li>
+                        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-mapper.html#mapper_functions">XPath Function Reference</a>                    </li>
+                    <li>
+                        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-mapper.html#examples">Mapping Examples</a>                    </li>
+                </ul>
+      </li>
+      <li>
+        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html">Using the Palette Elements</a>
+          <ul>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usinginvokeelement">Using the Invoke Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingreceiveelement">Using the Receive Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingreplyelement">Using the Reply Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingpartnerlinkelement">Using the PartnerLink Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingemptyelement">Using the Empty Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingwaitelement">Using the Wait Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingthrowelement">Using the Throw Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingassignelement">Using the Assign Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingflowelement">Using the Flow Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingsequenceelement">Using the Sequence Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingifelement">Using the If Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingpickelement">Using the Pick Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingscopeelement">Using the Scope Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingwhileelement">Using the While Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#usingprocesselement">Using the Process Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#repeatuntil">Using the Repeat Until Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#foreach">Using the For Each Element</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-palette.html#exit">Using the Exit Element</a>            </li>
+          </ul>
+      </li>
+      <li>
+        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-handlers.html">Using Handlers</a>
+            <ul>
+                <li>
+                    <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-handlers.html#usingfaulthandler">Using a Fault Handler</a>                </li>
+                <li>
+                    <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-handlers.html#usingeventhandler">Using an Event Handler</a>                </li>
+            </ul>
+      </li>
+      <li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-validation.html">Finding Usages of BPEL Components and Validating BPEL</a>
+       <ul>
+                <li>
+                    <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-validation.html#findingusages">Finding Usages of BPEL Components</a>                </li>
+                <li>
+                    <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-validation.html#validation">Validating BPEL</a>                </li>
+      </ul></li>
+	  <li>
+        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-test.html">Testing and Debugging BPEL Processes</a>
+          <ul>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-test.html#test">Testing a BPEL Process</a>            </li>
+            <li>
+              <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-test.html#debug">Debugging BPEL Processes</a>            </li>
+            <li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-test.html#debugwindows">BPEL Debugger Windows</a> </li>
+          </ul>
+      </li>
+      <li>
+        <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide-troubleshoot.html">Troubleshooting</a>      </li>
+  </ul>
+    <br>
+    <div class="feedback-box"><a href="mailto:nbdocs-feedback-dvd@usersguide.netbeans.org">Send Us Your Feedback</a></div>
+    <p align="center">
+      <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/bpel-guide.html#top">top</a></p>
+
+
+<div id="sbi_camera_button" class="sbi_search" style="left: 0px; top: 0px; position: absolute; width: 29px; height: 27px; border: none; margin: 0px; padding: 0px; z-index: 2147483647; display: none; "></div></body></html>

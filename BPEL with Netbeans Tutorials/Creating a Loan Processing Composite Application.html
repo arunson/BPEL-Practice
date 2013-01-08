@@ -1,0 +1,994 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0184)http://webcache.googleusercontent.com/search?q=cache:3fU3iyfaudYJ:java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html%3Fraw%3Dtrue+&cd=1&hl=ko&ct=clnk -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--<base href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true">--><base href="."><style type="text/css"></style></head><body><div style="background:#fff;border:1px solid #999;margin:-1px -1px 0;padding:0;"><div style="background:#ddd;border:1px solid #999;color:#000;font:13px arial,sans-serif;font-weight:normal;margin:12px;padding:8px;text-align:left">Google에 있는 <a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true" style="text-decoration:underline;color:#00c">http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true</a>의 저장된 페이지입니다. 2012년 9월 20일 16:54:57 GMT에 표시된 페이지의 스냅샷입니다. 그동안 <a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true" style="text-decoration:underline;color:#00c">현재 페이지</a>가 변경되었을 수 있습니다. <a href="http://support.google.com/websearch/bin/answer.py?hl=ko&p=cached&answer=1687222" style="text-decoration:underline;color:#00c">자세히 알아보기</a><br>도움말: 이 페이지에서 검색어를 빨리 찾으려면 <b>Ctrl+F</b> 또는 <b>⌘-F</b>(Mac)를 입력하여 검색 바를 사용하세요.<br><br><div style="float:right"><a href="http://webcache.googleusercontent.com/search?q=cache:3fU3iyfaudYJ:java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html%3Fraw%3Dtrue&hl=ko&prmd=imvns&strip=1" style="text-decoration:underline;color:#00c">텍스트 버전</a></div>
+<div>&nbsp;</div></div></div><div style="position:relative">
+
+
+
+<title>Creating a Loan Processing Composite Application</title>
+<meta name="description" content="Creating a simple loan requester composite application. A simple composite application. NetBeans IDE SOA pack.">
+<meta name="date" content="2007-05-01">
+<meta name="author" content="Sherry Barkodar, Annette Wegscheider">
+<!--
+<link href="../../netbeans.css" rel="stylesheet" type="text/css">
+-->
+
+    <style type="text/css">
+
+      @import url("../../../css/netbeans.css");
+      
+      #cnlogo            {display: none}
+      #collabnet         {display: none}
+      .topline           {display: none}
+      #toptabs           {display: none}
+      #breadcrumbs       {display: none}
+      #navcol            {display: none}
+      #bodycol .infomark {display: none}
+      #footer            {display: inherit}
+
+    </style>
+
+
+
+<br>
+<p><img src="./Creating a Loan Processing Composite Application_files/OpenEsbBanner3.gif"> </p>
+<hr width="98%">
+<div class="f-page-cell" id="doc"> <a name="top"></a>
+  <p>&nbsp;</p>
+<h1><strong>Creating a Loan Processing Composite Application</strong></h1>
+<div class="articledate" style="margin-left: 0px;">May 2007<br>
+This publication is applicable to NetBeans IDE 6.0 Preview with SOA (M9).<br>
+Contributed and maintained by Sherry Barkodar and Annette Wegscheider</div>
+<p>This tutorial provides an overview of a simple loan processing composite application and illustrates deploying, executing, and testing of a Composite Application.</p>
+<div class="indent">
+<!-- ======================================================================================== -->
+<h3>Business Use Case</h3>
+<p>The loan processing composite application satisfies the following business use case, also illustrated in <a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#figure-1">Figure 1</a>:</p>
+<ul>
+<li>The user applies for a loan by filling out a loan request, including information such as personal identifying information, amount of loan requested, and credit history. </li>
+<li>When the loan request is received, the personal information supplied by the user is verified across an existing database, and approval is granted or rejected based on the information and the amount requested. </li>
+<li>After certain formalities are fulfilled, a report, in the form of an approval letter, is generated and sent to the user, confirming the approval of the loan. </li>
+<li>If the loan is rejected for some reason, then a report showing the reason for the rejection is generated and displayed. </li>
+</ul>
+<p><a name="figure-1"></a><b>Figure 1: Loan Processing Use Case</b></p>
+<p><img src="./Creating a Loan Processing Composite Application_files/intro-diagram.png" alt="Figure 1: Loan Processing Use Case Diagram"></p>
+<!-- ======================================================================================== -->
+<h3>Prerequisites</h3>
+<p>This tutorial assumes that you have some basic knowledge of, or programming experience with, the Java language and platform and the NetBeans IDE.</p>
+<!-- ======================================================================================== -->
+<h3>System Requirements</h3>
+<p>This tutorial assumes that your system meets the requirements specified in the <i>System Requirements</i> topic of the <a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/community/releases/60/relnotes.html" title="NetBeans 6.0 Preview Release Notes">NetBeans 6.0 Preview Release Notes</a>.</p>
+<!-- ======================================================================================== -->
+<h3>Software Needed for the Tutorial</h3>
+<p>Before you begin, you need to install the following software on your computer: NetBeans IDE 6.0 Preview (M9) with SOA and Sun Java System Application Server 9.1 Beta 2, included in the Full download available from <a href="http://bits.netbeans.org/download/6.0/milestones/latest/">NetBeans IDE 6.0 Preview (M9) Download</a>.</p>
+<!-- ======================================================================================== -->
+<h3 class="tutorial">Contents</h3>
+<ul>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#ConfiguringtheTutorialEnvironment" title="Configuring and Starting the Sun Java System Application Server">Configuring and Starting the Sun Java System Application Server</a></li>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#creating-bpel-module-project" title="Creating the BPEL Module Project">Creating the BPEL Module Project</a></li>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#creating-xml-schema" title="Creating the XML Schema">Creating the XML Schema</a></li>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#creating-wsdl" title="Creating the WSDL Document">Creating the WSDL Document</a></li>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#opening-deploying-partner-web-service" title="Opening and Deploying the Partner Web Service">Opening and Deploying the Partner Web Service</a></li>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#creating-bpel-process" title="Creating the BPEL Process">Creating the BPEL Process</a></li>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#building-bpel-module-project" title="Building the BPEL Module Project">Building the BPEL Module Project</a></li>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#creating-comp-app" title="Creating the Composite Application Project">Creating the Composite Application Project</a></li>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#using-casaeditor" title="Using the Composite Application (Service Assembly) Editor">Using the Composite Application (Service Assembly) Editor</a></li>
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#deploying-testing-comp-app" title="Deploying and Testing the Composite Application">Deploying and Testing the Composite Application</a></li>
+<!-- <li><a href="#creating-web-service-client" title="Creating the Web Service Client">Creating the Web Service Client</a></li> -->
+<li><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#creating-ejb-module-project" title="(Optional) Creating the EJB Module Project">(Optional) Creating the EJB Module Project</a></li>
+</ul>
+</div>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="ConfiguringtheTutorialEnvironment"></a>Configuring and Starting the Sun Java System Application Server</h2>
+<p>Before you can deploy your application, the Sun Java System Application Server must be configured correctly and running.</p>
+<p><b>Note:</b> In the following procedures, <tt>Sun&nbsp;Java&nbsp;System&nbsp;Application&nbsp;Server</tt> node refers to the node that represents the Sun&nbsp;Java&nbsp;System&nbsp;Application&nbsp;Server 9.1 installation of the application server.</p>
+<p><b>To check the status of the Sun Java System Application Server:</b></p>
+<ol>
+<li>If the Runtime window is not visible, choose Window &gt; Runtime.</li>
+<li>In the Runtime window, expand the <tt>Servers</tt> node.<br>
+The <tt>Servers</tt> node should contain a <tt>Sun&nbsp;Java&nbsp;System&nbsp;Application&nbsp;Server</tt> subnode. If a <tt>Sun&nbsp;Java&nbsp;System&nbsp;Application&nbsp;Server</tt> node does not appear, go to <a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#configure-sjas">To configure the Sun Java System Application Server</a>.<br>
+If a green arrow badge appears on the <tt>Sun&nbsp;Java&nbsp;System&nbsp;Application&nbsp;Server</tt> node, the server is running. If a green arrow badge does not appear, go to <a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#start-sjas">To start the Sun Java System Application Server</a>.</li>
+</ol>
+<p><a name="configure-sjas"></a><b>To configure the Sun Java System Application Server:</b></p>
+<ol>
+<li>If the Runtime window is not visible, choose Window &gt; Runtime.</li>
+<li>In the Runtime window, right-click the <tt>Servers</tt> node and choose Add Server from the pop-up menu.<br>
+The Add Server Instance dialog box opens.</li>
+<li>In the Choose Server page, from the Server drop-down list, select Sun Java System Application Server.</li>
+<li>(Optional) In the Name field, change the default name for the server.<br>
+The IDE uses this name to identify the server.</li>
+<li>Click Next.<br>
+The Platform Location Folder page opens.</li>
+<li>In the Platform Location field, use the Browse button to navigate to and select the installation location of the application server.<br>
+The default installation location is different depending on the type of installation and the platform, as shown in <a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#table-1">Table 1</a>.<br>
+<br>
+<p><a name="table-1"></a><b>Table 1: Default Application Server Installation Directory</b></p>
+<table class="tablebg">
+<tbody><tr>
+<td class="tblheader">Platform</td>
+<td class="tblheader">Installing As...</td>
+<td class="tblheader">SOA Installation</td>
+<td class="tblheader">Tools Bundle Installation</td>
+</tr>
+<tr>
+<td class="tbltd0">Solaris&nbsp;OS&nbsp;<br>
+Linux</td>
+<td class="tbltd0">root</td>
+<td class="tbltd0"><tt>/opt/SUNWappserver</tt></td>
+<td class="tbltd0"><tt>/opt/SDK</tt></td>
+</tr>
+<tr>
+<td class="tbltd1">Solaris&nbsp;OS<br>
+Linux</td>
+<td class="tbltd1">user</td>
+<td class="tbltd1"><tt>~/SUNWappserver</tt></td>
+<td class="tbltd1"><tt>~/SDK</tt></td>
+</tr>
+<tr>
+<td class="tbltd0">Mac OS X</td>
+<td class="tbltd0">N/A</td>
+<td class="tbltd0"><tt>~/SUNWappserver</tt></td>
+<td class="tbltd0"><tt>~/SDK</tt></td>
+</tr>
+<tr>
+<td class="tbltd1">Windows</td>
+<td class="tbltd1">N/A</td>
+<td class="tbltd1"><tt>C:\Sun\AppServer</tt></td>
+<td class="tbltd1"><tt>C:\Sun\SDK</tt></td>
+</tr>
+</tbody></table>
+</li>
+<li>Select the Register Local Default Domain radio button and click Next. </li>
+<li>Enter the user name and password for the domain's administrator.<br>
+If you accepted the default values during the installation, the user name is <tt>admin</tt> and the password is <tt>adminadmin</tt>.</li>
+<li>Click Finish.</li>
+</ol>
+<p><a name="start-sjas"></a><b>To start the Sun Java System Application Server:</b></p>
+<ol>
+<li>In the Runtime window, right-click the <tt>Sun&nbsp;Java&nbsp;System&nbsp;Application&nbsp;Server</tt> node and choose Start.</li>
+<li>Wait until the following message appears in the Output window:<br>
+<tt>Application server startup complete.</tt><br>
+When the server is running, the IDE displays a green arrow badge on the <tt>Sun&nbsp;Java&nbsp;System&nbsp;Application&nbsp;Server</tt> node.</li>
+</ol>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="creating-bpel-module-project"></a>Creating the BPEL Module Project</h2>
+<p>In this section, you create a BPEL Module project called <tt>LoanRequestor</tt>. </p>
+<p><b>To create the <tt>LoanRequestor</tt> project: </b></p>
+<ol>
+<li>From the main menu, choose File &gt; New Project.<br>
+The New Project wizard opens.</li>
+<li>In the Categories list, select the <tt>SOA</tt> node, and in the Projects list, select the <tt>BPEL Module</tt> node.</li>
+<li>Click Next.</li>
+<li>In the Project Name field, type <tt>LoanRequestor</tt>. </li>
+<li>(Optional) In the Project Location field, use the Browse button to navigate to and select the location where the IDE will store the project files.</li>
+<li>Click Finish. <br>
+The Projects window now contains a project node for a BPEL Module project called <tt>LoanRequestor</tt>.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorproj-created.png" alt="LoanRequestor Project node in Projects window"></p>
+</li>
+</ol>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="creating-xml-schema"></a>Creating the XML Schema</h2>
+<p>In this section, you add a new XML schema file to your BPEL Module project and then add XML schema components to the schema.</p>
+<p><b>To create <tt>LoanRequestor.xsd</tt>:</b></p>
+<ol>
+<li>In the Projects window, expand the <tt>LoanRequestor</tt> project node, then right-click the <tt>Process&nbsp;Files</tt> node and choose New &gt; Other.<br>
+The New File wizard opens. </li>
+<li>In the New File wizard, do the following:<br>
+<ol type="a">
+<li>In the Choose File Type page, in the Categories list, select the <tt>XML</tt> node, then in the File Types list, select the <tt>XML&nbsp;Schema</tt> node and click Next.</li>
+<li>In the File Name field, type <tt>LoanRequestor</tt>.</li>
+<li>Click Finish.</li>
+</ol>
+In the Projects window, the <tt>Process&nbsp;Files</tt> node now contains a subnode labeled <tt>LoanRequestor.xsd</tt>. The Source Editor contains a tab for the XML schema file, <tt>LoanRequestor.xsd</tt>, with the Schema view open.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorschema-added.png" alt="New schema file added"></p></li>
+<li>In the Schema view, click the Design button to open the Design view of the XML schema editor.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorschema-created-designview.png" alt="New schema file open in Design view of XML schema editor"></p>
+</li>
+</ol>
+<p><b>To add complex types to the XML schema:</b></p>
+<ol>
+<li>In the Palette of the Design view, expand the XML Schema Components section and select the Complex Type icon.<br>
+If the Palette window is not visible, choose Window &gt; Palette from the main menu.</li>
+<li>Drag your selection to the schema design area immediately below the <tt>Complex&nbsp;Types</tt> node.<br>
+The IDE adds a <tt>Complex Type</tt> node and the name of the complex type (<tt>newComplexType</tt>) is selected and ready for you to change.</li>
+<li>Type <tt>processApplicType</tt> in the new node and press Enter.<br>
+The Design area now shows your new complex type, called <tt>processApplicType</tt>.</li>
+<li>Repeat steps 1 to 3 to create the complex type called <tt>processApplicRespType</tt>.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorschema-complextypes-added.png" alt="Complex types added in XML schema"> </p>
+</li>
+</ol>
+<p><b>To add local elements to <tt>processApplicType</tt>: </b></p>
+<ol>
+<li>In the XML Components section of the Palette, select the Element icon and drag your selection onto the <tt>processApplicType</tt> node in the schema design area.<br>
+The IDE adds an element node labeled <tt>newElement</tt>. </li>
+<li>If the Properties window is not visible, choose Window &gt; Properties.</li>
+<li>In the Schema design area, select the <tt>newElement</tt> node.</li>
+<li>In the Properties window, select the value field of the <tt>Name</tt> property to make it editable and type <tt>socialSecurityNumber</tt>.</li>
+<li>In the Properties window, set the value field of the <tt>Nillable</tt> property to <tt>True</tt>.</li>
+<li>In the Properties window, in the <tt>Definition</tt> property, click the ellipsis button.<br>
+The Definition dialog box opens.</li>
+<li>In the list, expand the <tt>Built-in&nbsp;Types</tt> node, select the <tt>string</tt> node, and click OK.</li>
+<li>Repeat steps 1 to 7 to add the following elements:<br>
+<br>
+<table class="tablebg">
+<tbody><tr>
+<td class="tblheader">Name</td>
+<td class="tblheader">Nillable</td>
+<td class="tblheader">Definition</td>
+</tr>
+<tr>
+<td class="tbltd0"><tt>applicantName</tt></td>
+<td class="tbltd0"><tt>True</tt></td>
+<td class="tbltd0"><tt>string</tt></td>
+</tr>
+<tr>
+<td class="tbltd1"><tt>applicantAddress</tt></td>
+<td class="tbltd1"><tt>True</tt></td>
+<td class="tbltd1"><tt>string</tt></td>
+</tr>
+<tr>
+<td class="tbltd0"><tt>applicantEmailAddress</tt></td>
+<td class="tbltd0"><tt>True</tt></td>
+<td class="tbltd0"><tt>string</tt></td>
+</tr>
+<tr>
+<td class="tbltd1"><tt>applicantAge</tt></td>
+<td class="tbltd1"><tt>True</tt></td>
+<td class="tbltd1"><tt>int</tt></td>
+</tr>
+<tr>
+<td class="tbltd0"><tt>applicantGender</tt></td>
+<td class="tbltd0"><tt>True</tt></td>
+<td class="tbltd0"><tt>string</tt></td>
+</tr>
+<tr>
+<td class="tbltd1"><tt>annualSalary</tt></td>
+<td class="tbltd1"><tt>True</tt></td>
+<td class="tbltd1"><tt>double</tt></td>
+</tr>
+<tr>
+<td class="tbltd0"><tt>amountRequested</tt></td>
+<td class="tbltd0"><tt>True</tt></td>
+<td class="tbltd0"><tt>double</tt></td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<p><b>To add a local element to <tt>processApplicRespType</tt>:</b></p>
+<ol>
+<li>In the XML Components section of the Palette, select the Element icon and drag your selection onto the <tt>processApplicRespType</tt> node in the schema design area.<br>
+The IDE adds an element node labeled <tt>newElement</tt>. </li>
+<li>In the schema design area, select the <tt>newElement</tt> node.</li>
+<li>In the Properties window, select the value field of the <tt>Name</tt> property to make it editable and type <tt>return</tt>.</li>
+<li>In the Properties window, in the <tt>Definition</tt> property, click the ellipsis button.<br>
+The Definition dialog box opens.</li>
+<li>In the list, expand the <tt>Built-in&nbsp;Types</tt> node and select the <tt>string</tt> node.</li>
+<li>Click OK.<br>
+When you have added all the local elements to the complex types, your Design view should look similar to the one shown below.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorschema-localelements-added.png" alt="Local elements to complex types added"> </p>
+</li>
+</ol>
+
+<p><b>To add global elements:</b></p>
+<ol>
+<li>In the XML Components section of the Palette, select the Element icon and drag your selection to the Design area, immediately below the Elements node. <br>
+The IDE adds a <code>newElement</code> component below the <tt>Elements</tt> nodes in the schema design area. </li>
+<li>In the Schema design area of the Design view, select the <tt>newElement</tt> node.</li>
+<li>In the Properties window, select the value field of the <tt>Name</tt> property to make it editable and type <tt>processApplicElement</tt>.</li>
+<li>In the Properties window, in the <tt>Definition</tt> property, click the ellipsis button.<br>
+The Element's definition - Definition dialog box opens.</li>
+<li>In the list of types, expand the <tt>Complex&nbsp;Types</tt> node and select the <tt>processApplicType</tt> complex type node.</li>
+<li>Click OK.<br>
+</li>
+<li>Repeat steps 1 to 6 to add another global element called <tt>processApplicRespElement</tt>, and select the <tt>processApplicRespType</tt> complex type as the definition.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorschema-globalelements-added.png" alt="Global elements to XML schema added"> </p>
+</li>
+<li>To save your changes, in the Projects window, select the <tt>LoanRequestor</tt> project node, and from the main menu, choose File &gt; Save All. </li>
+</ol>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="creating-wsdl"></a>Creating the WSDL Document</h2>
+<p>In this section, you add a WSDL file to your BPEL Module project and then configure the components of the WSDL Document. </p>
+<p><b>To create <tt>LoanRequestor.wsdl</tt>:</b></p>
+<ol>
+<li>In the Projects window, expand the <tt>LoanRequestor</tt> project node, then right-click the <tt>Process&nbsp;Files</tt> node and choose New &gt; WSDL Document. <br>
+The New WSDL Document wizard opens. </li>
+<li>In the Name and Location page, do the following:
+<ol type="a">
+<li>In the File Name field, type <tt>LoanRequestor</tt>. </li>
+<li>Select the Import XML Schema File(s) checkbox.</li>
+<li>In the XML Schema(s) field, click the Browse button.<br>
+The Add Import dialog box opens. This dialog box shows the XML schemas you can import.</li>
+<li>Expand <tt>By File</tt> &gt; <tt>LoanRequestor</tt> &gt; <tt>Process Files</tt>, and select <tt>LoanRequestor.xsd</tt>.<br>
+Make sure the checkbox in the Import column is selected for the <tt>LoanRequestor.xsd</tt> row.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorwsdl-select-xsd-import.png" alt="Selecting the XML schema to import"></p></li>
+<li>Click OK.</li>
+<li>In the New WSDL Document wizard, click Next.</li>
+</ol>
+The Abstract Configuration page opens. </li>
+<li>In the Input area of the Abstract Configuration page do the following:
+<ol type="a">
+<li>In the Message Part Name column, double-click the default value to make the field editable. </li>
+<li>Type <tt>requestLoanMessage</tt> and press Enter. </li>
+<li>In the Element Or Type column, click the ellipsis button. <br>
+The Select Element Or Type dialog box opens. </li>
+<li>Expand <tt>By File</tt> &gt; <tt>LoanRequestor</tt> &gt; <tt>src/LoanRequestor.xsd</tt> &gt; <tt>Elements</tt>.<br>
+<b>Note:</b> You may need to scroll up to the top of the list in the Select Element Or Type dialog box to see the <tt>By File</tt> node.</li>
+<li>Under the <tt>Elements</tt> node, select the <tt>processApplicElement</tt> node and click OK.</li>
+</ol>
+</li>
+<li>In the Output area of the Abstract Configuration page do the following:<br>
+<ol type="a">
+<li>In the Message Part Name column, double-click the default value to make the field editable. </li>
+<li>Type <tt>responsePart</tt> and press Enter.</li>
+<li>In the Element Or Type column, click the ellipsis button.<br>
+The Select Element or Type dialog box opens.</li>
+<li>Expand <tt>By File</tt> &gt; <tt>LoanRequestor</tt> &gt; <tt>src/LoanRequestor.xsd</tt> &gt; <tt>Elements</tt>. <br>
+<b>Note:</b> You may need to scroll up to the top of the list in the Select Element Or Type dialog box to see the <tt>By File</tt> node.</li>
+<li>Under the <tt>Elements</tt> node select <tt>processApplicRespElement</tt> and click OK. </li>
+</ol>
+The completed Abstract Configuration page should look similar to the one shown below.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/loanrequestorwsdl-abstract-config.png" title="Completed Abstract Configuration page of New WSDL Document wizard, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/loanrequestorwsdl-abstract-config-small.png" alt="Completed Abstract Configuration page of New WSDL Document wizard, click to enlarge"></a></p>
+</li>
+<li>Click Finish. <br>
+In the Projects window, the <tt>Process Files</tt> node now contains a subnode labeled <tt>LoanRequestor.wsdl</tt>. The Source Editor contains a tab for the WSDL file, <tt>LoanRequestor.wsdl</tt>, with the WSDL view open.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/loanrequestorwsdl-created-wsdlview.png" title="New WSDL document in the IDE, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/loanrequestorwsdl-created-wsdlview-small.png" alt="New WSDL document in the IDE, click to enlarge"></a></p>
+</li>
+</ol>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="opening-deploying-partner-web-service"></a>Opening and Deploying the Partner Web Service</h2>
+<p>The Loan Application communicates with its partner services via their public interfaces. These interfaces are defined in partner-specific WSDL files.</p>
+<p>In this tutorial, you use a J2EE project called <tt>LoanProcessor</tt>. You can create this project from scratch by following the instructions in <a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#creating-ejb-module-project">Creating the EJB Module Project</a>, or you can download the compressed project files in <tt><a href="http://www.netbeans.org/files/documents/4/1439/loanprocessing-loanprocessor.zip">loanprocessing-loanprocessor.zip</a></tt>. The <tt>LoanRequestor</tt> project contains a very basic EJB implementation of a partner service. <br>
+The partner web service must be deployed to the bundled Sun Java Application Server before you can test run the <tt>LoanRequestorCompositeApp</tt>.</p>
+<p>This implementation is only meant to serve as a test harness for the Loan Service process.</p>
+<p><b>To open the <tt>LoanProcessor</tt> project: </b></p>
+<ol>
+<li>Download the <tt><a href="http://www.netbeans.org/files/documents/4/1394/soa-loanprocessing-60-preview-LoanProcessor.zip">soa-loanprocessing-60-preview-LoanProcessor.zip</a></tt> file and extract it into your working directory for the IDE.<br>
+This will create a <tt>LoanProcessor</tt> project directory.</li>
+<li>From the main menu, choose File &gt; Open Project. <br>
+The Open Project wizard opens.</li>
+<li>Navigate to the directory where you extracted the project, select the <tt>LoanProcessor</tt> project, and click Open Project Folder. <br>
+A progress dialog box appears, and then the project appears in the Projects window.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanprocessorproj-opened.png" alt="LoanProcessor project open in the IDE"></p>
+</li>
+</ol>
+
+<p><b>To deploy the <tt>LoanProcessor project</tt>: </b></p>
+<ol>
+<li>Right-click the <tt>LoanProcessor</tt> project node and choose Deploy Project. </li>
+<li>Wait until the <tt>BUILD SUCCESSFUL</tt> message appears in the Output window.</li>
+<li>To verify that the <tt>LoanProcessor</tt> enterprise application is successfully deployed, switch to the Runtime window.</li>
+<li>In the Runtime window, expand <tt>Servers</tt> &gt; <tt>Sun&nbsp;Java&nbsp;System&nbsp;Application&nbsp;Server</tt> &gt; <tt>Applications</tt> &gt; <tt>EJB&nbsp;Modules</tt>. <br>
+A <tt>LoanProcessor</tt> node has been added. If this node does not appear, the deployment failed.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanprocessorproj-deployed.png" alt="Runtime window, LoanProcessor node under EJB Modules"></p>
+</li>
+</ol>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="creating-bpel-process"></a>Creating the BPEL Process</h2>
+<p><b>To create <tt>LoanRequestor.bpel</tt>:</b></p>
+<ol>
+<li>In the Projects window, expand the <tt>LoanRequestor</tt> project node, right-click the <tt>Process Files</tt> node and select New &gt; BPEL Process.<br>
+The new BPEL Process wizard opens.</li>
+<li>In the File Name field, type <tt>LoanRequestor</tt>.</li>
+<li>Click Finish. <br>
+In the Projects window, the <tt>Process Files</tt> node now contains a subnode labeled <tt>LoanRequestor.bpel</tt>.<br>
+The Source Editor contains a tab for the BPEL process, <tt>LoanRequestor.bpel</tt>, with the Design view of the BPEL Designer open.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/loanrequestorbpel-created-designview.png" title="New BPEL process file in the IDE, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/loanrequestorbpel-created-designview-small.png" alt="New BPEL process file in the IDE, click to enlarge"></a></p></li>
+</ol>
+<p><b>To add partner links:</b></p>
+<ol>
+<li>In the Projects window, expand the <tt>LoanRequestor</tt> project node, then expand the <tt>Process Files</tt> node and select the <tt>LoanRequestor.wsdl</tt> node.</li>
+<li>Drag your selection (<tt>LoanRequestor.wsdl</tt>) from the Projects window to the Design view.<br>
+The Create New Partner Link dialog box opens.</li>
+<li>Change the value in the Name field to <tt>BpelImplementation</tt>. </li>
+<li>Accept the other default values (WSDL File = <tt>/LoanRequestor.wsdl</tt>, Use Existing Partner Link Type radio button selected) and click OK. </li>
+<li>In the Projects window, expand the <tt>LoanProcessor</tt> EJB Module project node, then expand the <tt>Web&nbsp;Services</tt> node and select the <tt>LoanProcessor</tt> web service node.</li>
+<li>Drag your selection (<tt>LoanProcessor</tt> web service node) from the Projects window to the Design view.<br>
+The Create New Partner Link dialog box opens.</li>
+<li>Change the value in the Name field to <tt>EjbImplementation</tt>.</li>
+<li>Accept the other default values (WSDL File = <tt>/Partners/LoanProcessor/LoanProcessor.wsdl</tt>, Use a Newly Created Partner Link Type radio button selected) and click OK. <br>
+Notice that the IDE has added a <tt>Partners</tt> folder under <tt>LoanRequestor</tt> &gt; <tt>Process&nbsp;Files</tt>.</li>
+<li>Expand the <tt>Partners</tt> node.<br>
+Notice that this folder contains the <tt>LoanProcessor</tt> node that includes <tt>LoanProcessor.wsdl</tt>, <tt>LoanProcessorWrapper.wsdl</tt>, and <tt>LoanProcessor_xsd_1.xsd</tt>.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/loanrequestorbpel-partnerlinks-added.png" title="Partner links added, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/loanrequestorbpel-partnerlinks-added-small.png" alt="Partner links added, click to enlarge"></a></p></li>
+</ol>
+<p><b>To add a receive activity:</b></p>
+<ol>
+<li>In the Web Service section of the Palette, select the Receive icon and drag your selection to the Design area between the Process Start activity and the Process End activity.<br>
+The IDE provides you with visual clues to show you where you can drop the selection.<br>
+This action places a receive activity called <tt>Receive1</tt> in the Design view. </li>
+<li>Double-click the <tt>Receive1</tt> activity.<br>
+The Receive1 [Receive] Property Editor opens. </li>
+<li>Change the value in the Name field to <tt>ReceiveFromCustomer</tt>.</li>
+<li>From the Partner Link drop-down list, select BpelImplementation. <br>
+The IDE fills in the Operation field with <tt>LoanRequestorOperation</tt>.</li>
+<li>Click the Create button next to the Input Variable field and in the New Input Variable dialog box, accept the default values and click OK. <br>
+This creates a new input variable called <tt>LoanRequestorOperationIn</tt>.</li>
+<li>Click OK to close the Receive1 [Receive] - Property Editor.<br>
+The receive activity is now labeled <tt>ReceiveFromCustomer</tt> in the Design view and a connection is shown between the <tt>BpelImplementation</tt> partner link and the receive activity in the <tt>LoanRequestor</tt> process.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/loanrequestorbpel-receive-added.png" title="Receive activity added, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/loanrequestorbpel-receive-added-small.png" alt="Receive activity added, click to enlarge"></a></p></li>
+</ol>
+<p><b>To add an invoke activity:</b></p>
+<ol>
+<li>In the Web Service section of the Palette, select the Invoke icon and drag your selection to the Design area below the <tt>ReceiveFromCustomer</tt> activity. <br>
+The IDE provides you with visual clues to show you where you can drop the selection.<br>
+This action places an invoke activity called <tt>Invoke1</tt> in the Design view.</li>
+<li>Double-click the <tt>Invoke1</tt> activity. <br>
+The Invoke1 [Invoke] - Property Editor opens. </li>
+<li>Change the value in the Name field to <tt>InvokeLoanProcessorEJB</tt>.</li>
+<li>From the Partner Link drop-down list, select EjbImplementation. <br>
+The IDE fills in the Operation field with <tt>processApplicOperation</tt>.</li>
+<li>Click the Create button next to the Input Variable field and in the New Input Variable dialog box, accept the default values and click OK. <br>
+This creates a new input variable called <tt>ProcessApplicOperationIn</tt>.</li>
+<li>Click the Create button next to the Output Variable field and in the New Output Variable dialog box, accept the default values and click OK. <br>
+This creates a new output variable called <tt>ProcessApplicOperationOut</tt>.</li>
+<li>Click OK to close the Invoke1 [Invoke] - Property Editor.<br>
+The invoke activity is now labeled <tt>InvokeLoanProcessorEJB</tt> in the Design view and a connection is shown between the invoke activity in the <tt>LoanRequestor</tt> process and the <tt>EjbImplementation</tt> partner link.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorbpel-invoke-added.png" alt="Invoke activity added"></p></li>
+</ol>
+<p><b>To add a reply activity:</b></p>
+<ol>
+<li>In the Web Service section of the Palette, select the Reply icon and drag your selection to the Design area below the <tt>InvokeLoanProcessorEJB</tt> activity.<br>
+The IDE provides you with visual clues to show you where you can drop the selection.<br>
+This action places a reply activity called <tt>Reply1</tt> in the Design view.</li>
+<li>Double-click the <tt>Reply1</tt> activity. <br>
+The Reply1 [Reply] - Property Editor opens. </li>
+<li>Change the value in the Name field to <tt>ReplyToCustomer</tt>.</li>
+<li>From the Partner Link drop-down list, select BpelImplementation.<br>
+The IDE fills in the Operation field with <tt>LoanRequestorOperation</tt>.</li>
+<li>Make sure the Normal Response radio button is selected.</li>
+<li>Click the Create button next to the Output Variable field and in the New Output Variable dialog box, accept the default values and click OK. <br>
+This creates a new output variable called <tt>LoanRequestorOperationOut</tt>.</li>
+<li>Click OK to close the Reply1 [Reply] - Property Editor. <br>
+The reply activity is now labeled <tt>ReplyToCustomer</tt> in the Design view.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorbpel-reply-added.png" alt="Reply activity added"></p></li>
+</ol>
+<p><b>To add the <tt>CopyCustomerInfo</tt> assign activity:</b></p>
+<ol>
+<li>In the Basic Activities section of the Palette, select the Assign icon and drag your selection to the Design area between the <tt>ReceiveFromCustomer</tt> activity and the <tt>InvokeLoanProcessorEJB</tt> activity.<br>
+The IDE provides you with visual clues to show you where you can drop the selection.<br>
+This action places an assign activity called <tt>Assign1</tt> in the Design view.</li>
+<li>If the Properties window is not visible, choose Window &gt; Properties from the main menu.</li>
+<li>In the Design view, select the <tt>Assign1</tt> activity.</li>
+<li>In the Properties window, change the <tt>Name</tt> property to <tt>CopyCustomerInfo</tt>.</li>
+<li>If the BPEL Mapper window is not visible, choose Window &gt; BPEL Mapper from the main menu. <br>
+If the BPEL Mapper does not contain the information for <tt>CopyCustomerInfo</tt>, in the Design view, select the <tt>LoanRequestor</tt> process box, then select the <tt>CopyCustomerInfo</tt> assign activity. This will refresh the information in the BPEL Mapper.</li>
+<li>In the source pane (the left pane) of the BPEL Mapper, under the <tt>Variables</tt> node, expand the <tt>LoanRequestorOperationIn</tt> and <tt>requestLoanMessage</tt> nodes.<br>
+A node is shown for each local element in the <tt>processApplicType</tt> complex type in the schema you created earlier.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/bpelmapper-expand-requestloaninput.png" alt="Local schema elements shown in BPEL Mapper source pane"></p></li>
+<li>In the destination pane (the right pane) of the BPEL Mapper, under the <tt>Variables</tt> node, expand the <tt>ProcessApplicOperationIn</tt> and <tt>parameters</tt> nodes. <br>
+The same schema elements are shown as nodes under this <tt>parameters</tt> node.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/bpelmapper-expand-processapplicinput.png" alt="Local schema elements also appear in the BPEL Mapper destination pane"></p></li>
+<li>Drag <tt>socialSecurityNumber</tt> from the source pane to the <tt>socialSecurityNumber</tt> node in the destination pane.</li>
+<li>Repeat step 8 for the following variables:<br>
+<tt>applicantName</tt>, <tt>applicantAddress</tt>, <tt>applicantEmailAddress</tt>, <tt>applicantAge</tt>, <tt>applicantGender</tt>, <tt>annualSalary</tt>, and <tt>amountRequested</tt>.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/bpelmapper-assignreceivetoejbinput-done.png" title="Assignment done in BPEL Mapper, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/bpelmapper-assignreceivetoejbinput-done-small.png" alt="Assignment done in BPEL Mapper, click to enlarge"></a></p></li>
+<li>To save your changes, in the Projects window, select the <tt>LoanRequestor</tt> project node, and from the main menu, choose File &gt; Save All. </li>
+</ol>
+<p><b>To add the <tt>CopyLoanStatus</tt> assign activity:</b></p>
+<ol>
+<li>In the Basic Activities section of the Palette, select the Assign icon and drag your selection to the Design area between the <tt>InvokeLoanProcessorEJB</tt> activity and the <tt>ReplyToCustomer</tt> activity. <br>
+This action places an assign activity called <tt>Assign1</tt> in the Design view. </li>
+<li>Select the <tt>Assign1</tt> activity.</li>
+<li>In the Properties window, change the value of the <tt>Name</tt> property to <tt>CopyLoanStatus</tt>.</li>
+<li>If the BPEL Mapper window is not visible, choose Window &gt; BPEL Mapper from the main menu. </li>
+<li>In the source pane of the BPEL Mapper, under the <tt>Variables</tt> node, expand the <tt>ProcessApplicOperationOut</tt> and <tt>parameters</tt> nodes.<br>
+A <tt>return</tt> node appears under <tt>parameters</tt>. </li>
+<li>In the destination pane of the BPEL Mapper, under the <tt>Variables</tt> node, expand the <tt>LoanRequestorOperationOutput</tt> and <tt>responsePart</tt> nodes. <br>
+A <tt>return</tt> node appears under <tt>responsePart</tt>.</li>
+<li>Drag <tt>return</tt> from the source pane to the <tt>return</tt> node in the destination pane of the BPEL Mapper.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/bpelmapper-assignejboutputtoreply-done.png" title="Assignment done in BPEL Mapper, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/bpelmapper-assignejboutputtoreply-done-small.png" alt="Assignment done in BPEL Mapper, click to enlarge"></a></p></li>
+<li>To save your changes, in the Projects window, select the <tt>LoanRequestor</tt> project node, and from the main menu, choose File &gt; Save All. </li>
+</ol>
+
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="building-bpel-module-project"></a>Building the BPEL Module Project</h2>
+<p><b>To build the <tt>LoanRequestor</tt> project:</b></p>
+<ul>
+<li>In the Projects window, right-click the <tt>LoanRequestor</tt> project node and choose Clean and Build Project.<br>
+If a <tt>BUILD SUCCESSFUL</tt> message appears in the Output window, then the Build has succeeded.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorbpel-built.png" alt="BPEL Module project built"></p></li>
+</ul>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="creating-comp-app"></a>Creating the Composite Application Project</h2>
+<p>Before you deploy the BPEL Module project, you must create a composite application. Deploying the project makes the service assembly available to the application server, thus allowing its service units to be run.</p>
+<p><b>To create the composite application project:</b></p>
+<ol>
+<li>From the main menu, choose File &gt; New Project.<br>
+The New Project wizard opens.</li>
+<li>In the Categories list, select the <tt>SOA</tt> node.</li>
+<li>In the Projects list, select the <tt>Composite&nbsp;Application</tt> node.</li>
+<li>Click Next.</li>
+<li>In the Project Name field, type <tt>LoanRequestorCompositeApp</tt>. </li>
+<li>Click Finish. <br>
+The Projects window now contains a project node for a Composite Application project called <tt>LoanRequestorCompositeApp</tt>.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/loanrequestorca-project-added.png" alt="LoanRequestorCompositeApplication project added"></p></li>
+</ol>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="using-casaeditor"></a>Using the Composite Application (Service Assembly) Editor</h2>
+<p>In this section, you use the Composite Application (Service Assembly) editor to modify the project configuration and build the BPEL Module project. You then add a WSDL endpoint and a connection and then you verify and change the properties of the auto-generated WSDL endpoints.</p>
+<p><b>To use the Composite Application (Service Assembly) editor to modify the project configuration and build the BPEL Module project:</b></p>
+<ol>
+<li>In the Projects window, select the <tt>LoanRequestorCompositeApp</tt> project node and choose Edit Application Configuration from the pop-up menu.<br>
+The IDE opens the <tt>.casa</tt> file in the Composite Application (Service Assembly) editor. The design area of the Design view of the editor has three parts: WSDL Ports, JBI Modules, and External Modules.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/casa-editor-design-area.png" alt="CASA editor, design area of the Design view"></p></li>
+<li>In the Projects window, select the <tt>LoanRequestor</tt> project node and drag your selection to the JBI Modules area in the Design view of the <tt>LoanRequestorCompositeApp.casa</tt> file. <br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/add-jbi-module-casa-editor.png" title="JBI Module added using Composite Application editor, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/add-jbi-module-casa-editor-small.png" alt="JBI Module added using Composite Application editor, click to enlarge"></a></p>
+</li>
+<li>In the editor toolbar, click the Build Project button, <img src="./Creating a Loan Processing Composite Application_files/button-build-project.png" alt="Build Project button"> to build the <tt>LoanRequestor</tt> BPEL Module project.<br>
+When this step has completed:
+<ul>
+<li>The status bar message shows the following message:<br>
+<tt>Finished building build.xml (jbi-build).</tt></li>
+<li>The Output window should look similar to the one shown below.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/bpel-module-project-build-done-output-window.png" alt="Output window after BPEL Module project is built"></p></li>
+<li>The Design view of the <tt>LoanRequestorCompositeApp.casa</tt> file should look similar to the one shown below.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/bpel-module-project-build-done-design-view.png" alt="Design view after BPEL Module project is built"></p></li>
+</ul>
+</li>
+</ol>
+<p><b>To create the WSDL endpoint:</b></p>
+<ol>
+<li>In the WSDL Bindings section of the Palette, select the soap icon.</li>
+<li>Drag your selection to the WSDL Ports area in the Design view of the <tt>LoanRequestorCompositeApp.casa</tt> file.<br>
+The IDE adds a WSDL port labeled <tt>casaPort1</tt>.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/wsdl-endpoint-casaport1-added-design-view.png" alt="Design view after WSDL endpoint casaport1 is added"></p>
+</li>
+</ol>
+<p><b>To create a connection:</b></p>
+<ol>
+<li>In the <tt>casaPort1</tt> port in the Design view, click the consume endpoint icon, <img src="./Creating a Loan Processing Composite Application_files/icon-consume-endpoint.png" alt="Consume endpoint icon, not selected">.<br>
+The colors of the icon change when you select the endpoint: <img src="./Creating a Loan Processing Composite Application_files/icon-consume-endpoint-selected.png" alt="Consume endpoint icon selected">.</li>
+<li>Drag your selection to <tt>LoanRequestorPortTypeRole_myRole</tt> in the <tt>(BPEL)&nbsp;LoanRequestor</tt> box in the JBI Modules area.<br>
+The IDE creates a new connection.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/connection-added-design-view.png" alt="Design view after adding connection"></p>
+</li>
+</ol>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="deploying-testing-comp-app"></a>Deploying and Testing the Composite Application</h2>
+<p>You can enhance the Composite Application project by adding test cases, binding to the operation, supplying input, and then using the tester.</p>
+<p><b>To deploy the composite application:</b></p>
+<ul>
+<li>Right-click the <tt>LoanRequestorCompositeApp</tt> project node and choose Deploy Project.<br>
+If the <tt>BUILD SUCCESSFUL</tt> message appears in the Output window, then the deployment has succeeded.</li>
+</ul>
+<p><b>To add the test case for an approved request:</b></p>
+<ol>
+<li>In the Projects window, expand the <tt>LoanRequestorCompositeApp</tt> project node, right-click the <tt>Test</tt> node, and choose New Test Case from the pop-up menu. <br>
+The New Test Case wizard opens.</li>
+<li>In the Test Case Name field, type <tt>ApprovedTestCase</tt>, and click Next.</li>
+<li>In the Select the WSDL Document page, expand the <tt>LoanRequestorCompositeApp - Process Files</tt> node, select <tt>LoanRequestorCompositeApp.wsdl</tt>, and click Next.</li>
+<li>In the Select the Operation to Test page, select the <tt>LoanRequestorOperation</tt> and click Finish. <br>
+In the Projects window, the IDE has added a new node under the <tt>Test</tt> node, <tt>ApprovedTestCase</tt>. This node has two subnodes: <tt>Input</tt> and <tt>Output</tt>. The Source Editor contains a tab for the input file, <tt>Input.xml</tt>.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/loanrequestorca-project-test-added.png" title="Test case for approved request added to composite application, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/loanrequestorca-project-test-added-small.png" alt="Test case for approved request added to composite application, click to enlarge"></a></p>
+<b>Note:</b> If the Source Editor does not contain a tab for <tt>Input.xml</tt>, double-click the <tt>Input</tt> node in the Projects window to open the file.</li>
+<li>In the Source Editor tab for the <tt>Input.xml</tt> file, define the variable values by replacing these lines of code:<br>
+<pre class="examplecode">      &lt;loan:socialSecurityNumber&gt;?string?&lt;/loan:socialSecurityNumber&gt;
+      &lt;loan:applicantName&gt;?string?&lt;/loan:applicantName&gt;
+      &lt;loan:applicantAddress&gt;?string?&lt;/loan:applicantAddress&gt;
+      &lt;loan:applicantEmailAddress&gt;?string?&lt;/loan:applicantEmailAddress&gt;
+      &lt;loan:applicantAge&gt;?3?&lt;/loan:applicantAge&gt;
+      &lt;loan:applicantGender&gt;?string?&lt;/loan:applicantGender&gt;
+      &lt;loan:annualSalary&gt;?1.051732E7?&lt;/loan:annualSalary&gt;
+      &lt;loan:amountRequested&gt;?1.051732E7?&lt;/loan:amountRequested&gt;
+</pre>
+with the following lines of code:
+<pre class="examplecode">      &lt;loan:socialSecurityNumber&gt;111-11-1111&lt;/loan:socialSecurityNumber&gt;
+      &lt;loan:applicantName&gt;May JavaOne&lt;/loan:applicantName&gt;
+      &lt;loan:applicantAddress&gt;1601 Willow Road, Menlo Park, CA 94025&lt;/loan:applicantAddress&gt;
+      &lt;loan:applicantEmailAddress&gt;mayj12007@gmail.com&lt;/loan:applicantEmailAddress&gt;
+      &lt;loan:applicantAge&gt;36&lt;/loan:applicantAge&gt;
+      &lt;loan:applicantGender&gt;female&lt;/loan:applicantGender&gt;
+      &lt;loan:annualSalary&gt;100000&lt;/loan:annualSalary&gt;
+      &lt;loan:amountRequested&gt;1000000&lt;/loan:amountRequested&gt;
+</pre>
+</li>
+<li>From the main menu, choose File &gt; Save All. </li>
+<li>Close the Source Editor tab for <tt>Input.xml</tt>.</li>
+</ol>
+
+<p><b>To add the test case for a rejected request:</b></p>
+<ol>
+<li>In the Projects window, expand the <tt>LoanRequestorCompositeApp</tt> project node, right-click the <tt>Test</tt> node, and choose New Test Case from the pop-up menu. <br>
+The New Test Case wizard opens.</li>
+<li>In the Test Case Name field, type <tt>RejectedTestCase</tt>, and click Next.</li>
+<li>In the Select the WSDL Document page, expand the <tt>LoanRequestorCompositeApp - Process Files</tt> node, select <tt>LoanRequestorCompositeApp.wsdl</tt>, and click Next.</li>
+<li>In the Select the Operation to Test page, select the <tt>LoanRequestorOperation</tt> and click Finish. <br>
+In the Projects window, the IDE has added a new node under the <tt>Test</tt> node, <tt>RejectedTestCase</tt>. This node has two subnodes: <tt>Input</tt> and <tt>Output</tt>. The Source Editor contains a tab for the input file, <tt>Input.xml</tt>.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/loanrequestorca-project-test-rejected-added.png" title="Test case for rejected request added to composite application, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/loanrequestorca-project-test-rejected-added-small.png" alt="Test case for rejected request added to composite application, click to enlarge"></a></p>
+<b>Note:</b> If the Source Editor does not contain a tab for <tt>Input.xml</tt>, double-click the <tt>Input</tt> node in the Projects window to open the file.</li>
+<li>In the Source Editor tab for the <tt>Input.xml</tt> file, define the variable values by replacing these lines of code:<br>
+<pre class="examplecode">      &lt;loan:socialSecurityNumber&gt;?string?&lt;/loan:socialSecurityNumber&gt;
+      &lt;loan:applicantName&gt;?string?&lt;/loan:applicantName&gt;
+      &lt;loan:applicantAddress&gt;?string?&lt;/loan:applicantAddress&gt;
+      &lt;loan:applicantEmailAddress&gt;?string?&lt;/loan:applicantEmailAddress&gt;
+      &lt;loan:applicantAge&gt;?3?&lt;/loan:applicantAge&gt;
+      &lt;loan:applicantGender&gt;?string?&lt;/loan:applicantGender&gt;
+      &lt;loan:annualSalary&gt;?1.051732E7?&lt;/loan:annualSalary&gt;
+      &lt;loan:amountRequested&gt;?1.051732E7?&lt;/loan:amountRequested&gt;
+</pre>
+with the following lines of code:
+<pre class="examplecode">      &lt;loan:socialSecurityNumber&gt;222-22-2222&lt;/loan:socialSecurityNumber&gt;
+      &lt;loan:applicantName&gt;John Smith&lt;/loan:applicantName&gt;
+      &lt;loan:applicantAddress&gt;8888 Willow Road, Fremont, CA 94538&lt;/loan:applicantAddress&gt;
+      &lt;loan:applicantEmailAddress&gt;jsmithj12007@gmail.com&lt;/loan:applicantEmailAddress&gt;
+      &lt;loan:applicantAge&gt;15&lt;/loan:applicantAge&gt;
+      &lt;loan:applicantGender&gt;male&lt;/loan:applicantGender&gt;
+      &lt;loan:annualSalary&gt;100000&lt;/loan:annualSalary&gt;
+      &lt;loan:amountRequested&gt;1000000&lt;/loan:amountRequested&gt;
+</pre>
+</li>
+<li>From the main menu, choose File &gt; Save All. </li>
+<li>Close the Source Editor tab for <tt>Input.xml</tt>.</li>
+</ol>
+
+<p><b>To populate the test file with baseline information for <tt>ApprovedTestCase</tt>:</b></p>
+<ol>
+<li>In the Projects window, double-click the <tt>Output</tt> node under <tt>ApprovedTestCase</tt> to examine the contents of the file.<br>
+Notice that initially, <tt>Output.xml</tt> is empty. <br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/empty-output-xml-file.png" alt="Empty Output file for ApprovedTestCase"></p>
+</li>
+<li>In the Projects window, right-click the <tt>ApprovedTestCase</tt> node and choose Run from the pop-up menu.<br>
+<b>Note:</b> The first run is a special case because <tt>Output.xml</tt> is empty and the IDE cannot compare the test results with the contents of <tt>Output.xml</tt>. Notice the failed message in the Output window.<br>
+The Overwrite Empty Output? dialog box opens.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/loanrequestorca-first-test-run-error.png" title="First test run failed, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/loanrequestorca-first-test-run-error-small.png" alt="First test run failed, click to enlarge"></a></p>
+</li>
+<li>Click Yes. <br>
+The IDE populates <tt>Output.xml</tt> with default information. This version of the file now contains the baseline information that will be used in subsequent test runs. This version of the file is also known as the "golden" file.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/output-xml-file-populated.png" title="Baseline output file created for ApprovedTestCase, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/output-xml-file-populated-small.png" alt="Baseline output file created for ApprovedTestCase, click to enlarge"></a></p>
+</li>
+</ol>
+<p><b>To populate the test file with baseline information for <tt>RejectedTestCase</tt>:</b></p>
+<ol>
+<li>In the Projects window, double-click the <tt>Output</tt> node under <tt>RejectedTestCase</tt> to examine the contents of the file.<br>
+Notice that initially, <tt>Output.xml</tt> is empty.</li>
+<li>In the Projects window, right-click the <tt>RejectedTestCase</tt> node and choose Run from the pop-up menu.<br>
+<b>Note:</b> The first run is a special case because <tt>Output.xml</tt> is empty and the IDE cannot compare the test results with the contents of <tt>Output.xml</tt>. Notice the failed message in the Output window.<br>
+The Overwrite Empty Output? dialog box opens.</li>
+<li>Click Yes. <br>
+The IDE populates <tt>Output.xml</tt> with default information. This version of the file now contains the baseline information that will be used in subsequent test runs. This version of the file is also known as the "golden" file.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/output-xml-file-populated-rejected.png" title="Baseline output file created for RejectedTestCase, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/output-xml-file-populated-rejected-small.png" alt="Baseline output file created for RejectedTestCase, click to enlarge"></a></p>
+</li>
+</ol>
+<p><b>To run the tests:</b></p>
+<ol>
+<li>In the Projects window, right-click the <tt>ApprovedTestCase</tt> node and choose Run from the pop-up menu.<br>
+Notice that the contents of <tt>Output.xml</tt> are preserved and are not overwritten by the new result. You can double-click the node that represents the passed test (immediately below the <tt>Output</tt> node to see the results.</li>
+<li>In the Projects window, right-click the <tt>RejectedTestCase</tt> node and choose Run from the pop-up menu.<br>
+Notice that the contents of <tt>Output.xml</tt> are preserved and are not overwritten by the new result. You can double-click the node that represents the passed test (immediately below the <tt>Output</tt> node to see the results.<br><br>
+<p><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/images/articles/ep-loanprocessing/60/loanrequestorca-project-test-passed.png" title="Tests passed, review results, click to enlarge"><img src="./Creating a Loan Processing Composite Application_files/loanrequestorca-project-test-passed-small.png" alt="Tests passed, review results, click to enlarge"></a></p>
+</li>
+<li>In the Source Editor, close all documents.</li>
+</ol>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<!-- ======================================================================================== -->
+<!-- Commented out this entire section - not working in current builds
+<h2><a name="creating-web-service-client"></a>Creating the Web Service Client</h2>
+<p>The customer submits the required information through a web service client.</p>
+<p><b>To create the web service client application: </b></p>
+<ol>
+<li>From the main menu, choose File &gt; New Project. <br>
+The New Project wizard opens. </li>
+<li>In the Categories list, select the <tt>Web</tt> node. </li>
+<li>In the Projects list, select the <tt>Web Application</tt> node. </li>
+<li>Click Next. </li>
+<li>In the Name and Location page, in the Project Name field, type <tt>LoanApplicationWebClient</tt>.</li>
+<li>Accept the default values for the remaining fields and click Finish.<br>
+The Projects window now contains a project node for a web service client called <tt>LoanApplicationWebClient</tt>. The Source Editor contains a tab for <tt>index.jsp</tt>, the index page for your web application.<br><br>
+<p><a href="../../images/articles/ep-loanprocessing/60/loanapplicationwebclient-added.png" title="LoanApplicationWebClient project added, index page open in Source Editor, click to enlarge"><img src="../../images/articles/ep-loanprocessing/60/loanapplicationwebclient-added-small.png" alt="LoanApplicationWebClient project added, index page open in Source Editor, click to enlarge"></a></p>
+</li>
+<li>In the Projects window, right-click the <tt>LoanApplicationWebclient</tt> project node and choose New &gt; Web&nbsp;Service&nbsp;Client. <br>
+The New Web Service Client wizard opens. </li>
+<li>In the New Web Service Client wizard, do the following:
+<ol type="a">
+<li>In the WSDL and Client Location page, select the Local File option.</li>
+<li>Click the Browse button. </li>
+<li>In the Open dialog box, navigate to and select the <tt>LoanRequestor.wsdl</tt> file in the <tt>LoanRequestor</tt> BPEL Module project.<br>
+The path should look similar to this: <tt><i>path-to-project-folder</i>\LoanRequestor\src\LoanRequestor.wsdl</tt></li>
+<li>Click Open.</li>
+<li>In the Package field, type <tt>loanprocesswsclient</tt>.</li>
+<li>Click Finish. <br>
+The IDE adds the web service client information under the <tt>Web&nbsp;Service&nbsp;References</tt> node in the Projects window.<br><br>
+<p><img src="../../images/articles/ep-loanprocessing/60/loanapplicationwebclient-wsclient-added.png" alt="Web service client added"></p></li>
+</ol>
+</li>
+</ol>
+<p><b>To create the <tt>loanclient.jsp</tt> page:</b></p>
+<ol>
+<li>In the Projects window, right-click the <tt>LoanApplicationWebClient</tt> project node and choose New &gt; JSP.</li>
+<li>In the JSP File wizard, JSP File Name field, type <tt>loanclient</tt> and accept the other default values.</li>
+<li>Click Finish.</li>
+<li>In the Projects window, expand the <tt>LoanApplicationWebClient</tt> node and then expand the <tt>Web Pages</tt> node.<br>
+Notice that a <tt>loanclient.jsp</tt> node has been added and the <tt>loanclient.jsp</tt> file is opened in the Source Editor. </li>
+<li>In the Source Editor tab for the <tt>loanclient.jsp</tt> file, right-click anywhere in the source to display the pop-up menu and choose Web&nbsp;Service&nbsp;Client&nbsp;Resources &gt; Call&nbsp;Web&nbsp;Service&nbsp;Operation. </li>
+<li>In the Select Operation to Invoke dialog box, expand <tt>LoanApplicationWebClient</tt> &gt; <tt>LoanRequestor</tt> &gt; <tt>LoanRequestorService</tt> &gt; <tt>LoanRequestorPort</tt>.</li>
+<li>Select the <tt>LoanRequestorOperation</tt> node and click OK.<br>
+The IDE updates the <tt>loanclient.jsp</tt> file to include a web service invocation. Scroll to the bottom of the file to see the code.<br><br>
+<p><a href="../../images/articles/ep-loanprocessing/60/loanapplicationwebclient-loanclient-jsp-added.png" title="loanclient.jsp created, click to enlarge"><img src="../../images/articles/ep-loanprocessing/60/loanapplicationwebclient-loanclient-jsp-added-small.png" alt="loanclient.jsp created, click to enlarge"></a></p>
+</li>
+</ol>
+
+<p><b>To modify the <tt>loanclient.jsp</tt> file:</b></p>
+<ol>
+<li>In the Source Editor tab for the <tt>loanclient.jsp</tt> file, add the following code immediately below the line containing <tt>// TODO process result here</tt>:<br>
+<pre class="examplecode">
+	requestLoanMessage.setSocialSecurityNumber(request.getParameter(&quot;ssn&quot;));
+	requestLoanMessage.setApplicantName(request.getParameter(&quot;name&quot;));
+	requestLoanMessage.setApplicantAddress(request.getParameter(&quot;address&quot;));
+	requestLoanMessage.setApplicantEmailAddress(request.getParameter(&quot;email&quot;));
+	requestLoanMessage.setApplicantAge(Integer.parseInt(request.getParameter(&quot;age&quot;)));
+	requestLoanMessage.setApplicantGender(request.getParameter(&quot;gender&quot;));
+	requestLoanMessage.setAnnualSalary(Double.parseDouble(request.getParameter(&quot;salary&quot;)));
+	requestLoanMessage.setAmountRequested(Double.parseDouble(request.getParameter(&quot;loanamount&quot;)));
+</pre>
+</li>
+<li>Locate the following code: <tt>out.println(&quot;Result = &quot;+result);</tt> and replace <tt>&quot;+result</tt> with <tt>&quot;+result.getReturn()</tt><br>
+The line should look like this:<br>
+<pre class="examplecode">
+	out.println(&quot;Result = &quot;+result.getReturn());
+</pre></li>
+<li>Add the following code immediately below the line containing <tt>// TODO handle custom exceptions here</tt> <br>
+<pre class="examplecode">
+	out.println(&quot;===&gt;&gt;&gt;Exception : &quot; + ex.toString());
+</pre></li>
+<li>Add the following code immediately below the line containing <tt>// &lt;%-- end web service invocation --%&gt;&lt;hr/&gt;</tt> <br>
+<pre class="examplecode">
+	&lt;form action=&quot;index.jsp&quot;&gt; &lt;input type=&quot;submit&quot; value=&quot;Back To Loan Application&quot;/&gt; &lt;/form&gt;
+</pre><br>
+At this point, the source, from <tt>&lt;%-- start web service invocation --%&gt;</tt> should look similar to the following illustration.<br><br>
+<p><a href="../../images/articles/ep-loanprocessing/60/loanapplicationwebclient-loanclient-jsp-modified.png" title="loanclient.jsp modified, click to enlarge"><img src="../../images/articles/ep-loanprocessing/60/loanapplicationwebclient-loanclient-jsp-modified-small.png" alt="loanclient.jsp modified, click to enlarge"></a></p>
+</li>
+<li>To save your changes, in the Projects window, select the <tt>loanclient.jsp</tt> node, and from the main menu, choose File &gt; Save. </li>
+</ol>
+
+<p><b>To modify the <tt>index.jsp</tt> file:</b></p>
+<ol>
+<li>If <tt>index.jsp</tt> is not open in the Source Editor, do the following:<br>
+<ol type="a">
+<li>In the Projects window, expand the <tt>LoanApplicationWebclient</tt> project node, then expand the <tt>Web Pages</tt> node.</li>
+<li>Double-click the <tt>index.jsp</tt> node.<br>
+The <tt>index.jsp</tt> file opens in the Source Editor. </li>
+</ol></li>
+<li>Add the following code immediately before the <tt>&lt;/body&gt;</tt> line.<br>
+<pre class="examplecode">
+&lt;form action=&quot;loanclient.jsp&quot;&gt;
+ &lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;SSN&lt;/td&gt;
+		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;ssn&quot; value=&quot;123456789&quot;/&gt;&lt;/td&gt;
+		&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Name&lt;/td&gt;
+		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;ORCHBank User&quot;/&gt;&lt;/td&gt;
+		&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Address&lt;/td&gt;
+		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;address&quot; value=&quot;16 Network Circle, Menlo Park,CA&quot; /&gt;&lt;/td&gt;
+		&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Email&lt;/td&gt;
+		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;orchbankuser@bankmail.com&quot; /&gt;&lt;/td&gt;
+		&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Age&lt;/td&gt;
+		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;age&quot; value=&quot;27&quot; /&gt;&lt;/td&gt;
+		&lt;td&gt;Age limits are as follows: Min = 18, Max = 60;
+		If age exceeds 60, BPEL engine's rule rejects the application.&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Gender&lt;/td&gt;
+		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;gender&quot; value=&quot;male&quot; /&gt;&lt;/td&gt;
+		&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Salary&lt;/td&gt;
+		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;salary&quot; value=&quot;56789.10&quot; /&gt;&lt;/td&gt;
+		&lt;td&gt;Minimum Salary = 20,000.00&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Loan Amount&lt;/td&gt;
+		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;loanamount&quot; value=&quot;19500.00&quot; /&gt;&lt;/td&gt;
+		&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;td&gt;&lt;input type=&quot;submit&quot; value=&quot;Submit&quot; name=&quot;Submit Application&quot; /&gt;&lt;/td&gt;
+		&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+	&lt;/tr&gt;
+ &lt;/table&gt;
+&lt;/form&gt;
+</pre>
+</li>
+<li>To save your changes, in the Projects window, select the <tt>index.jsp</tt> node, and from the main menu, choose File &gt; Save. </li>
+</ol>
+<p><b>To run the <tt>index.jsp</tt> file:</b></p>
+<ol>
+<li>In the Projects window, expand the <tt>LoanApplicationWebclient</tt> node, then expand the <tt>Web Pages</tt> node.</li>
+<li>Right-click the <tt>index.jsp</tt> file, and choose Run File from the pop-up menu.<br>
+In the Output window, the URL that the IDE will launch in a browser is shown, and a <tt>BUILD SUCCESSFUL</tt> message appears if the build has succeeded.<br>
+The IDE opens a web browser with the URL shown in the Output window.<br>
+<b>Note:</b> If a web browser is not opened, launch a web browser and navigate to the URL from the <tt>LoanApplicationWebclient (run)</tt> tab of the Output window.<br><br>
+<p><a href="../../images/articles/ep-loanprocessing/60/loanapplicationwebclient-index-jsp-in-browser.png" title="index.jsp in web browser, click to enlarge"><img src="../../images/articles/ep-loanprocessing/60/loanapplicationwebclient-index-jsp-in-browser-small.png" alt="index.jsp in web browser, click to enlarge"></a></p>
+</li>
+<li>In your browser, in the JSP Page, click the submit button.<br>
+Loan Application Status is displayed.<br><br>
+<p><img src="../../images/articles/loanprocessing/loanapproved.png" alt="Loan Application Status"> </p>
+</li>
+</ol>
+<p align="center"><a href="#top">top</a></p>
+-->
+<!-- ======================================================================================== -->
+<h2><a name="creating-ejb-module-project"></a>(Optional) Creating the EJB Module Project</h2>
+<p>In this tutorial, you use a J2EE project called <tt>LoanProcessor</tt>. You can create this project from scratch by following the instructions in this section, or you can download the compressed project files in <tt><a href="http://www.netbeans.org/files/documents/4/1439/loanprocessing-loanprocessor.zip">loanprocessing-loanprocessor.zip</a></tt>.</p>
+<p><b>To create the EJB Module project:</b></p>
+<ol>
+<li>From the main menu, choose File &gt; New Project. </li>
+<li>In the Categories list, select the <tt>Enterprise</tt> node, and in the Projects list, select the <tt>EJB Module</tt> node. </li>
+<li>Click Next. </li>
+<li>In the Project Name field, type <tt>LoanProcessor</tt>.</li>
+<li>(Optional) In the Project Location field, use the Browse button to navigate to and select a different folder where the IDE will store the EJB project files. </li>
+<li>Click Finish. <br>
+The Projects window now contains a project node for an EJB Module project called <tt>LoanProcessor</tt>. </li>
+</ol>
+<p><b>To create a web service:</b></p>
+<ol>
+<li>In the Projects window, right-click the <tt>LoanProcessor</tt> project node and choose New &gt; Web Service from the pop-up menu.<br>
+The New Web Service wizard opens.</li>
+<li>In the New Web Service wizard, do the following:
+<ol type="a">
+<li>In the Name and Location page, in the Web Service Name field, type <tt>LoanProcessor</tt>.</li>
+<li>In the Package field, type <tt>com.sun.loanprocessor</tt>.<br><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/ejb-module-create-web-service.png" alt="Name and Location page of New Web Service wizard completed"></p>
+</li>
+<li>Click Finish.</li>
+</ol>
+The IDE creates the web service and opens <tt>LoanProcessor</tt> in the Source Editor.</li>
+<li>In the Projects window, expand the <tt>LoanProcessor</tt> project node, then expand the <tt>Web&nbsp;Services</tt> node.</li>
+<li>Right-click the <tt>LoanProcessor</tt> node (the web service) and choose Add Operation.<br>
+The Add Operation dialog box opens.</li>
+<li>In the Name field, type <tt>processApplicOperation</tt>.</li>
+<li>In the Parameters tab, add the following seven parameters by clicking the Add button and completing the row that the IDE adds for each parameter.<br><br>
+<table class="tablebg">
+<tbody><tr>
+<td class="tblheader">Name</td>
+<td class="tblheader">Type</td>
+</tr>
+<tr>
+<td class="tbltd0"><tt>socialSecurityNumber</tt></td>
+<td class="tbltd0"><tt>java.lang.String</tt></td>
+</tr>
+<tr>
+<td class="tbltd0"><tt>applicantName</tt></td>
+<td class="tbltd0"><tt>java.lang.String</tt></td>
+</tr>
+<tr>
+<td class="tbltd1"><tt>applicantAddress</tt></td>
+<td class="tbltd1"><tt>java.lang.String</tt></td>
+</tr>
+<tr>
+<td class="tbltd0"><tt>applicantEmailAddress</tt></td>
+<td class="tbltd0"><tt>java.lang.String</tt></td>
+</tr>
+<tr>
+<td class="tbltd1"><tt>applicantAge</tt></td>
+<td class="tbltd1"><tt>java.lang.Integer</tt></td>
+</tr>
+<tr>
+<td class="tbltd0"><tt>applicantGender</tt></td>
+<td class="tbltd0"><tt>java.lang.String</tt></td>
+</tr>
+<tr>
+<td class="tbltd1"><tt>annualSalary</tt></td>
+<td class="tbltd1"><tt>java.lang.Double</tt></td>
+</tr>
+<tr>
+<td class="tbltd0"><tt>amountRequested</tt></td>
+<td class="tbltd0"><tt>java.lang.Double</tt></td>
+</tr>
+</tbody></table><br>
+<p><img src="./Creating a Loan Processing Composite Application_files/ejb-module-create-web-service-add-oper.png" alt="Add Operation dialog box completed"></p>
+</li>
+<li>In the Add Operation dialog box, click OK.</li>
+<li>In the Source Editor, click the Source button to show the Source view of the <tt>LoanProcessor.java</tt> file.<br>
+Notice that the IDE has updated the <tt>LoanProcessor.java</tt> document with a skeleton for the <tt>processApplicOperation</tt> method.</li>
+<li>In the Source Editor, replace <br>
+<pre class="examplecode">	/*
+	* TODO write your implementation code here:
+	*/
+	return null;
+</pre>
+with the following code:<br>
+<pre class="examplecode">        int MINIMUM_AGE_LIMIT = 18;
+        int MAXIMUM_AGE_LIMIT = 65;
+        double MINIMUM_SALARY = 20000;
+        int AVERAGE_LIFE_EXPECTANCY = 70;
+        String result = "Loan Application APPROVED.";
+        
+        // Check age of applicant
+        // If less than min age limit, rejected
+        if(applicantAge &lt; MINIMUM_AGE_LIMIT) {
+            result = "Loan Application REJECTED - Reason: Under-aged " +
+                    applicantAge +
+                    ". Age needs to be over " +
+                    MINIMUM_AGE_LIMIT +
+                    " years to qualify.";
+            System.out.println(result);
+            return result;
+        }
+        
+        // Check age of applicant
+        // If more than max age limit, rejected
+        if(applicantAge &gt; MAXIMUM_AGE_LIMIT) {
+            result = "Loan Application REJECTED - Reason: Over-aged " +
+                    applicantAge +
+                    ". Age needs to be under " +
+                    MAXIMUM_AGE_LIMIT +
+                    " years to qualify.";
+            System.out.println(result);
+            return result;
+        }
+        
+        // Check annual salary
+        // If less than min salary, rejected
+        if(annualSalary &lt; MINIMUM_SALARY) {
+            result = "Loan Application REJECTED - Reason: Annual Salary $" +
+                    annualSalary +
+                    " too low. Annual Salary needs to be over $" +
+                    MINIMUM_SALARY +
+                    " to qualify.";
+            System.out.println(result);
+            return result;
+        }
+        
+        // Calculate the years to pay off loan based on applicantAge
+        int yearsToRepay = AVERAGE_LIFE_EXPECTANCY - applicantAge;
+        
+        // Calculate the max amount of loan based on years to pay off loan
+        double limit = annualSalary * yearsToRepay * 0.5;
+        
+        // Check amount requested, if higher than limit, rejected
+        if(amountRequested &gt; limit) {
+            result = "Loan Application REJECTED - Reason: You are asking for too much $" +
+                    amountRequested +
+                    ". Annual Salary $" +
+                    annualSalary +
+                    ", Age " +
+                    applicantAge +
+                    " years. Your limit is $" +
+                    limit;
+            System.out.println(result);
+            return result;
+        }
+        System.out.println(result);
+        return result;
+
+</pre>
+</li>
+<li>To save your changes choose File &gt; Save from the main menu.</li>
+<li>(Optional) Close the <tt>LoanProcessor</tt> tab in the Source Editor.</li>
+<li>Return to <a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#opening-deploying-partner-web-service">Opening and Deploying the Partner Web Service</a>.</li>
+</ol>
+<p align="center"><a href="http://java.net/projects/open-esb/sources/svn/content/trunk/www/kb/60/ep-loanprocessing.html?raw=true#top">top</a></p>
+<br>
+<!-- -------------------------------------------------------------------------->
+<hr class="light">
+  <p>&nbsp;</p>
+<br style="clear:both">
+</div>
+
+
+</div><div id="sbi_camera_button" class="sbi_search" style="left: 0px; top: 0px; position: absolute; width: 29px; height: 27px; border: none; margin: 0px; padding: 0px; z-index: 2147483647; display: none; "></div></body></html>

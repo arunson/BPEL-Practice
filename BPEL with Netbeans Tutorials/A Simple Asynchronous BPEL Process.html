@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0063)http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>A Simple Asynchronous BPEL Process</title>
+<meta name="description" content="A Simple Asynchronous BPEL Process">
+<link rel="stylesheet" type="text/css" href="./A Simple Asynchronous BPEL Process_files/netbeans.css" media="screen">
+<meta name="author" content="Sherry Barkodar">
+<style type="text/css"></style></head>
+<body>
+<h1>Developing a Simple Asynchronous BPEL Process</h1>
+<div class="articledate" style="margin-left: 0px;font-style:italic;">
+<p>Contributed by <a href="mailto:Sherry.Barkodar@Sun.COM">Sherry Barkodar</a>
+<br>Maintained by <a href="mailto:Irina.Filippova@Sun.COM">Irina Filippova</a><br> 
+December 2007<br>
+<br>
+</p>
+</div>
+<p>This tutorial provides an overview of the sample project, <tt>AsynchronousSample,</tt> and illustrates deploying, executing and testing an asynchronous BPEL process using  NetBeans IDE 6.0 with all the necessary runtimes. </p>
+<p>The process is an echo process, but it is an asynchronous echo, not a synchronous one. A client sends the process a message. The process receives the input message and returns immediately. Then the process asynchronously calls the original client and sends the same message back. An asynchronous process is used when the BPEL process is long-running (takes a long time to compute the result). The results are returned to the client by performing an invocation on the client. In this tutorial, you will use a simple BPEL project called <tt>AsynchronousSample</tt> and a Composite Application project called <tt>AsynchronousSampleApplication</tt>. The project includes WSDL and Schema files, a deployment descriptor, and input files for testing. The web service interface for this process is a single asynchronous operation. </p>
+ <p align="center"><b>Expected duration: <i>30</i> minutes</b></p>
+ <div class="indent">
+<!-- ======================================================================================== -->
+<h3>Contents</h3>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+       <tbody><tr>
+         <td align="left" valign="top">
+           <ul>
+             <li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#tut_req" title="Tutorial Requirements">Tutorial Requirements</a></li>
+             <li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#ConfiguringtheTutorialEnvironment">Configuring and Starting the GlassFish Application Server</a><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#ConfiguringtheTutorialEnvironment"></a><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#overview" title="Overview"></a></li>
+		<li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#openingtheasynchronoussample">Opening the AsynchronousSample Project</a><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#Openingthesampleproject"></a><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#createSampleApp" title="Create the Sample Application Project"></a></li>
+		<li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#exploringthebpelandjbiproject">Exploring the BPEL and JBI Project in the Projects Window</a><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#exploringbpelprj"></a><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#openCASA" title="Open the CASA Editor and Build the Application"></a></li>
+		<li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#exploringtheasyncronoussampleclient">Exploring the AsynchronousSampleClient in the Projects Window</a></li>
+		<li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#deployingtheproject">Deploying the Project to the Application Server</a><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#addingif"></a></li>
+         <li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#testingtheasync">Testing the AsynchronousSampleApplication</a></li>
+           </ul>
+         </td>
+         <td width="20"></td>
+         <td align="right" valign="top">  
+	  <img src="./A Simple Asynchronous BPEL Process_files/netbeans-stamp.gif" alt="Content on this page applies to the NetBeans 6.0 IDE" title="Content on this page applies to the NetBeans 6.0 IDE" border="0" height="45" width="206" align="right">
+   </td>
+       </tr>
+</tbody></table>
+<p align="center"><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#top">top</a>
+</p><h2><a name="tut_req"></a>Tutorial Requirements </h2>
+<p>Before you proceed, make sure you review the requirements in this section.</p>
+<div class="indent">
+<h3 class="tutorial">Prerequisites</h3>
+<p>This tutorial assumes that you have some basic knowledge of, or programming experience with, the Java language and platform and the NetBeans IDE.</p>
+<!-- ======================================================================================== -->
+<h3 class="tutorial">System Requirements</h3>
+<p>This tutorial assumes that your system meets the requirements specified in the <i>System Requirements</i> topic of the <a href="http://docs.huihoo.com/netbeans/6.0/community/releases/60/relnotes.html" title="NetBeans IDE 6.0 Release Notes">NetBeans IDE 6.0 Release Notes</a>.</p> 
+
+<!-- ======================================================================================== -->
+<h3 class="tutorial">Software Needed for the Tutorial</h3>
+<p>Before you begin, you need to install the following software on your computer: NetBeans IDE 6.0 with SOA and the GlassFish application server.</p> 
+
+
+<!-- ======================================================================================== -->
+</div>
+<p align="center"><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="ConfiguringtheTutorialEnvironment"></a>Configuring and Starting the GlassFish Application Server</h2>
+<p>When you install full NetBeans 6.0 download, it includes the GlassFish application server.  The NetBeans IDE will automatically start the application server when needed. </p>
+<p><strong>To start the GlassFish application server: </strong></p>
+  <ol>
+    <li>If the Services window is not visible, choose Window &gt; Services. </li>
+    <li>In the Services window, expand the Servers node. <br>
+      The Servers node should contain the GlassFish application server subnode. If the GlassFish application server node does not appear, go to <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#configure-sjas">To configure the GlassFish Application Server</a>. </li>
+  </ol>
+  <blockquote>
+    <p><img src="./A Simple Asynchronous BPEL Process_files/glassfish.png"></p>
+    <p>&nbsp;</p>
+</blockquote>
+  <ol>
+    <li value="3"> Right-click the GlassFish application server node and select Start. <br>
+       The Output window displays logging information about the application startup. If the Output window is not visible, choose Window &gt; Output &gt; Output. <br>
+      <br>
+      When the message <tt>Application server startup complete</tt> appears in the Output window, the application server is running.<br>      
+      <b>Note:</b> If a green arrow badge appears on the GlassFish application server node, the server is running. <br>
+    </li>
+  </ol>
+  <p><span class="bold"><b>Note</b></span><b>:</b> Deploying an application to the GlassFish application server will automatically start the server. Thus, you do not have to manually start the application server. </p>
+  <p><b>Note:</b> The following procedure shows how to configure the IDE to use an alternate version of the GlassFish V2 application server.</p>
+  <p><a name="configure-sjas"></a><span class="bold"><b>To configure the GlassFish V2 application server: </b></span></p>
+  <p>You might want to use a different version of the application server than the one provided with NetBeans 6.0. For example, you might want to download and install a more current version of the GlassFish V2 application server from the <a href="https://glassfish.dev.java.net/" target="_blank">GlassFish Community</a> site. </p>
+  <p> The following procedure shows how to configure the NetBeans 6.0 IDE to use an alternate version of the GlassFish V2 application server. It assumes that you have downloaded and installed the alternate version of the application server. </p>
+  <ol>
+
+      <li>In the Services window, right-click the Servers node and choose Add Server from the pop-up menu. <br>
+        The Add Server Instance dialog box opens. </li>
+      <li>In the Choose Server page, select GlassFish V2 from the  list. </li>
+      <li>Click Next. <br>
+          The Platform Folder Location page opens. </li>
+      <li>In the Platform Location field, use the Browse button to navigate to and select the installation location of the application server. <br>
+          <br>
+        If you installed the GlassFish application server in the default location,  use <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#table-1">Table 1</a> as a guide for locating the installation. Otherwise, navigate to the location where you installed the GlassFish V2 application server. <br>
+        <br>
+        <p><a name="table-1"></a><strong>Table 1: Default Application Server Installation Directory </strong></p>
+        <table>
+          <tbody>
+            <tr>
+              <td class="tblheader">Platform </td>
+              <td class="tblheader">Installing As... </td>
+              <td class="tblheader">SOA Installation </td>
+              <td class="tblheader">Tools Bundle Installation </td>
+            </tr>
+            <tr>
+              <td class="tbltd0">Solaris OS <br>
+                Linux </td>
+              <td class="tbltd0">root </td>
+              <td class="tbltd0"><tt>/opt/glassfish-v2</tt> </td>
+              <td class="tbltd0"><tt>/opt/SUNWappserver</tt> </td>
+            </tr>
+            <tr>
+              <td class="tbltd1">Solaris OS <br>
+                Linux </td>
+              <td class="tbltd1">user </td>
+              <td class="tbltd1"><tt>~/glassfish-v2</tt> </td>
+              <td class="tbltd1"><tt>~/SUNWappserver</tt> </td>
+            </tr>
+            <tr>
+                  
+              <td class="tbltd0">Mac OS X </td>
+              <td class="tbltd0">N/A </td>
+              <td class="tbltd0"><tt>/Applications/NetBeans/glassfish-v2b58g</tt></td>
+              <td class="tbltd0"><tt>/Applications/NetBeans/NetBeans 6.0</tt> </td>
+            </tr>
+            <tr>
+              <td class="tbltd1">Windows </td>
+              <td class="tbltd1">N/A </td>
+              <td class="tbltd1"><tt>C:\Program Files\glassfish-v2-b58g    </tt> </td>
+              <td class="tbltd1"><tt>C:\Sun\AppServer</tt> </td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>Select the Register Local Default Domain radio button and click Next. </li>
+      <li>Enter the user name and password for the domain's administrator. <br>
+        If you accepted the default values during the installation, the user name is <tt>admin</tt> and the password is <tt>adminadmin</tt>. </li>
+      <li>Click Finish. </li>
+</ol>
+<p align="center"> <a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#top">top</a> </p>
+<!-- ======================================================================================== -->
+<h2><a name="openingtheasynchronoussample"></a>Opening the AsynchronousSample Project </h2>
+<ol>
+<li>From the IDE's main menu, choose File &gt;New Project. <br>
+The New Project wizard opens.</li>
+<li>In the Categories list, select <tt>Samples&gt;SOA</tt>.</li>
+<li>In the Projects list, select <tt>Asynchronous BPEL Process</tt>.<br><br>
+<p><img src="./A Simple Asynchronous BPEL Process_files/asynchselected.png" alt="Asynchronous BPEL Process selected" border="0"></p>
+</li>
+<li>Click Next. </li>
+<li>In the Project Name field, type <tt>AsynchronousSample</tt>.<br><br>
+<p><img src="./A Simple Asynchronous BPEL Process_files/projname.png" alt="Typing project name"> </p>
+</li>
+<li>(Optional) In the Project Location field, use the Browse button to navigate to and select a different folder where the IDE will store the project files.</li>
+<li>Click Finish. <br>
+The Projects window now contains two project nodes: one for a BPEL project called <tt>AsynchronousSample</tt>, and one for a Composite application project called <tt>AsynchronousSampleApplication</tt>. <br>
+<!--Notice a broken reference in the <tt>AsynchronousSampleApplication</tt> node. This is normal behavior. The Composite Application has a dependency on JBI Module.<br>
+You can resolve the broken reference later in the <a href="#deployingtheproject" class="style3">Deploying the project to the Application Server </a> section .<br>-->
+</li>
+</ol>
+<p align="center"><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="exploringthebpelandjbiproject"></a>Exploring the BPEL and JBI Project in the Projects Window </h2>
+<ol>
+<li>In the Projects window, expand the <tt>AsynchronousSample</tt> node, then expand the <tt>Process Files</tt> node. <br>
+The <tt>Process Files</tt> node contains these items:
+<ul>
+<li><tt>AsynchronousSample.bpel</tt>, the BPEL process </li>
+<li><tt>AsynchronousSample.wsdl</tt>, the process web service interface</li>
+<li><tt>AsynchronousSample.xsd</tt>, the schema file.</li>
+<li><tt>AsynchronousSampleClient.bpel</tt>, the test client process. </li>
+<li><tt>AsynchronousSampleClient.wsdl</tt>, the wsdl for the client process</li>
+</ul>
+</li>
+<li>In the Projects window, expand the <tt>AsynchronousSampleApplication </tt>node. The JBI deployment project contains:
+<ul>
+<!--<li><tt>Source Packages</tt></li>-->
+<li><tt>Process Files</tt> </li>
+<li><tt>JBI Modules</tt></li>
+<li><tt>Test</tt></li>
+</ul>
+<p><img src="./A Simple Asynchronous BPEL Process_files/projwin.png" alt="AsynchronousSample expanded"> </p>
+</li>
+<li>Double-click the <tt>AsynchronousSample.bpel</tt> node.<br>
+Notice the following:
+<ul>
+<li>The Source Editor contains a tab for <tt>AsynchronousSample.bpel</tt>. </li>
+<li>The <tt>AsynchronousSample</tt> diagram is shown in the Design view. <br>
+The Design view is the business processes visual designer. In this view, you can visually model a business process. The BPEL Design tool automatically generates BPEL code that corresponds to the visual design. </li>
+<li>The Palette of BPEL elements opens to the right of the Source Editor.</li>
+<li>The Navigator window shows the BPEL logical view of the BPEL process. </li>
+</ul>
+<p><a href="http://docs.huihoo.com/netbeans/6.0/images/articles/ep-asynchsample/60/asynchexpanded.png"><img src="./A Simple Asynchronous BPEL Process_files/asynchexpandedscaled.png" alt="AsynchronousSample.bpel expanded" border="0"><br>
+Click to enlarge</a> </p>
+</li>
+</ol>
+<p align="center"><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="exploringtheasyncronoussampleclient"></a>Exploring the AsynchronousSampleClient in the Projects Window </h2>
+<p>The AsynchronousSample project is an asynchronous BPEL process. Testing an asynchronous process requires a client that is capable of receiving an asynchronous callback. Therefore, the project also contains an AsynchronousSampleClient BPEL process. The sole purpose of the AsynchronousSampleClient process is to facilitate the unit testing of the AsynchronousSample. </p>
+<ol>
+<li>Double-click the <tt>AsynchronousSampleClient.bpel</tt> node. <br>
+The IDE displays the AsynchronousSampleClient diagram in the Design view. <br>
+Notice that AsynchronousSample ( partnerLinkB ) does an invocation back on AsynchronousSampleClient to return the response. <br><br>
+<p><img src="./A Simple Asynchronous BPEL Process_files/clientbpelinvoke.png" alt="AsynchronousSampleClient diagram"></p>
+</li>
+<li>Double-click the receiveCallback receive activity in the AsynchronousSampleClient process. <br>
+The Property Editor for <tt>receiveCallback</tt> opens. </li>
+<li>Click the Correlations tab, select correlator row and click Edit.<br>
+The Edit Correlation Set Editor appears.<br>
+Notice how correlation is used to correlate this response to the correct instance of AsynchronousSampleClient. <br><br>
+<p><img src="./A Simple Asynchronous BPEL Process_files/editcorset.png" alt="Edit Correlation Set Editor"></p>
+</li>
+</ol>
+<p align="center"><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="deployingtheproject"></a>Deploying the project to the Application Server </h2>
+<p>Notice that a BPEL project is not directly deployable. It must be added as a JBI module to a Composite Application project. Then you can deploy the Composite Application project.&nbsp; Deploying the project makes the service assembly available to the application server, thus allowing its service units to be run.</p>
+<ol>
+<!--<li>Under the Project tab, right-click the <tt>AsynchronousSampleApplication</tt> deployment project node and choose Add JBI Module.<br>
+The Select Project wizard appears. </li>
+<li>In the wizard, select <tt>AsynchronousSample</tt>.
+<p><img src="../../images/articles/ep-asynchsample/60/selprojwizard.png" alt="Select Project wizard"></p>
+</li>
+<li>Click the Add Project JAR Files button. </li>-->
+<li>Expand <tt>AsynchronousSampleApplication</tt> &gt; <tt>JBI Modules</tt>.<br>
+Ensure that <tt>AsynchronousSample.jar</tt> node is added.<br><br>
+<p><img src="./A Simple Asynchronous BPEL Process_files/jaradded.png" alt="AsynchronousSample.jar added to Composite Application Project"></p>
+</li>
+<li>Right-click the <tt>AsynchronousSampleApplication</tt> project node, and choose Deploy. </li>
+<li>In the Warning dialog box, make sure <tt>GlassFish V2 </tt> is selected and click OK. </li>
+<li>Deployment has succeeded if you see the following message in the Output window:<br><br>
+<p><img src="./A Simple Asynchronous BPEL Process_files/outputmessage.png" alt="Deployment succeeded"></p>
+</li>
+<li> If the Output window is not visible, choose Window &gt; Output.</li>
+</ol>
+<p align="center"><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2 class="style2"><a name="testingtheasync"></a>Testing the AsynchronousSampleApplication </h2>
+<ol>
+<li>In the Projects window, expand the <tt>AsynchronousSampleApplication</tt> &gt; <tt>Test</tt> &gt; <tt>NewTestcase0</tt>. The <tt>NewTestcase0</tt> node contains two XML files:
+<ul>
+<li><tt>Input.xml</tt> for input </li>
+<li><tt>Output.xml</tt> for output</li>
+</ul>
+Each time the test is run, the current output is compared to the content of <tt>Output.xml</tt>. <br><br>
+<p><img src="./A Simple Asynchronous BPEL Process_files/testnodenew.png" alt="NewTestcase0"></p>
+</li>
+<li>Right-click the <tt>AsynchronousSampleApplication</tt> project node, and choose Test  from the pop-up menu.<br>
+The following message appears in the Output window:<br><br>
+<p><img src="./A Simple Asynchronous BPEL Process_files/testpassed.png" alt="NewTestcase0 passed"></p>
+</li>
+</ol>
+<!-- -------------------------------------------------------------------------->
+<h2><a name="see_also"></a>See Also</h2>
+<ul>
+<li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/synchsample.html">Developing a Simple Synchronous BPEL Process</a></li>
+
+<li><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/helloworldca.html">Creating a Hello World Composite Application</a></li>
+</ul>
+<div class="feedback-box"><a href="mailto:nbdocs-feedback-dvd@usersguide.netbeans.org">Send Us Your Feedback</a></div>
+<br style="clear:both;">
+<p align="center"><a href="http://docs.huihoo.com/netbeans/6.0/kb/60/soa/asynchsample.html#top">top</a></p>
+
+
+
+</div><div id="sbi_camera_button" class="sbi_search" style="left: 0px; top: 0px; position: absolute; width: 29px; height: 27px; border: none; margin: 0px; padding: 0px; z-index: 2147483647; display: none; "></div></body></html>

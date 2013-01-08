@@ -1,0 +1,395 @@
+
+<!-- saved from url=(0122)http://webcache.googleusercontent.com/search?q=cache:KgQ0ACq6EJAJ:www.javanb.com/netbeans/1/19834.html+&cd=2&hl=ko&ct=clnk -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--<base href="http://www.javanb.com/netbeans/1/19834.html">--><base href="."><style type="text/css"></style></head><body bgcolor="#FFFFFF"><div style="background:#fff;border:1px solid #999;margin:-1px -1px 0;padding:0;"><div style="background:#ddd;border:1px solid #999;color:#000;font:13px arial,sans-serif;font-weight:normal;margin:12px;padding:8px;text-align:left">Google에 있는 <a href="http://www.javanb.com/netbeans/1/19834.html" style="text-decoration:underline;color:#00c">http://www.javanb.com/netbeans/1/19834.html</a>의 저장된 페이지입니다. 2012년 9월 22일 15:19:02 GMT에 표시된 페이지의 스냅샷입니다. 그동안 <a href="http://www.javanb.com/netbeans/1/19834.html" style="text-decoration:underline;color:#00c">현재 페이지</a>가 변경되었을 수 있습니다. <a href="http://support.google.com/websearch/bin/answer.py?hl=ko&p=cached&answer=1687222" style="text-decoration:underline;color:#00c">자세히 알아보기</a><br>도움말: 이 페이지에서 검색어를 빨리 찾으려면 <b>Ctrl+F</b> 또는 <b>⌘-F</b>(Mac)를 입력하여 검색 바를 사용하세요.<br><br><div style="float:right"><a href="http://webcache.googleusercontent.com/search?q=cache:KgQ0ACq6EJAJ:www.javanb.com/netbeans/1/19834.html&hl=ko&prmd=imvns&strip=1" style="text-decoration:underline;color:#00c">텍스트 버전</a></div>
+<div>&nbsp;</div></div></div><div style="position:relative">
+<!-- #BeginTemplate "/Templates/article.dwt" -->
+
+<!-- #BeginEditable "doctitle" -->
+<title>Refactoring in a BPEL Module Project Using NetBeans Enterprise Pack </title>
+<meta name="keywords" content="Eclipse, J2EE, J2EE, J2ME, JSP 等各种开发资源,netbeans 编程, netbeans 技术, netbeans 源码, netbeans 文档 ">
+<meta name="description" content="This tutorial explores refactoring in NetBeans Enterprise Pack. The NetBeans IDE with NetBeans Enterprise Pack supports XML schema, Business Process Execution Language (BPEL), and Web Service Description Language (WSDL) source file refactoring. You can use refactoring to rename and safely delete local and global components. ">
+<!-- #EndEditable --> 
+<meta name="robots" content="all">
+
+<link href="./Refactoring in a BPEL Module Project Using NetBeans Enterprise Pack_files/style1.css" type="text/css" rel="stylesheet">
+
+
+<div id="bd" align="center">
+
+<!-- begin: 头部导航 -->
+<div id="tp">
+<div id="tp_l">
+<div id="tp_lt"><a href="http://www.javanb.com/" title="Java 编程资料牛鼻网, Java 程序员论坛, Java 编程资料" class="nobd"><img src="./Refactoring in a BPEL Module Project Using NetBeans Enterprise Pack_files/javanb.gif" width="250" height="60" border="0" title="Java 编程资料牛鼻网"></a></div>
+</div>
+<div id="tp_r">
+<div id="tp_rt">
+<!-- #BeginEditable "top468" -->
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-5801877696325956";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text_image";
+//2007-05-10: JavaNB_Article_View_468x60
+google_ad_channel = "0139239488";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "776655";
+google_color_text = "000000";
+google_color_url = "776655";
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><!-- #EndEditable --> 
+</div>
+</div>
+</div>
+
+<table cellspacing="0" cellpadding="0" width="100%" border="0">
+<tbody><tr>
+<td>
+<div id="Nav">
+<div class="ltab"><div class="tabContent"><a href="http://www.javanb.com/">首页</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://www.javanb.com/bbs/">论坛</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://book.javanb.com/">图书</a></div></div>
+<div class="tab"><div class="tabContent selected"><a href="http://www.javanb.com/index-doc.html">开发资料</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://doc.javanb.com/">在线文档</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://url.javanb.com/">网址</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://download.javanb.com/">下载</a></div></div>
+<div class="rtab"><div class="tabContent"><a href="http://www.javanb.com/contact.html">联系我们</a></div>
+</div>
+</div>
+</td></tr>
+<tr><td>
+<div id="NavSub">&nbsp;<a href="http://www.javanb.com/news/index.html">新闻</a>│<a href="http://www.javanb.com/java/index.html">Java</a>│<a href="http://www.javanb.com/javascript/index.html">JavaScript</a>│<a href="http://www.javanb.com/eclipse/index.html">Eclipse</a>│<a href="http://www.javanb.com/eclipse-eng/index.html">Eclipse 英文</a>│<a href="http://www.javanb.com/j2ee/index.html">J2EE</a>│<a href="http://www.javanb.com/j2me/index.html">J2ME</a>│<a href="http://www.javanb.com/j2se/index.html">J2SE</a>│<a href="http://www.javanb.com/jsp/index.html">JSP</a>│<a href="http://www.javanb.com/netbeans/index.html">Netbeans</a>│<a href="http://www.javanb.com/hibernate/index.html">Hibernate</a>│<a href="http://www.javanb.com/jbuilder/index.html">JBuilder</a>│<a href="http://www.javanb.com/spring/index.html">Spring</a>│<a href="http://www.javanb.com/struts/index.html">Struts</a></div>
+</td>
+</tr>
+</tbody></table>
+<!-- end: 头部导航 -->
+
+<!-- #BeginEditable "topgg" -->
+
+<!-- begin: search box -->
+<div id="topad">
+<form method="get" action="http://www.javanb.com/ggres.php" target="_top">
+<!-- SiteSearch Google -->
+<b>站内搜索</b>: 请输入搜索关键词 
+<input type="hidden" name="domains" value="javanb.com">
+<input type="text" name="q" size="31" maxlength="255" value="" id="sbi" class="inputclass">
+<input type="submit" name="sa" value="搜索" id="sbb" class="buttonclass">
+<input type="hidden" name="sitesearch" value="javanb.com">
+<input type="hidden" name="client" value="pub-5801877696325956">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="channel" value="0487632749">
+<input type="hidden" name="ie" value="GB2312">
+<input type="hidden" name="oe" value="GB2312">
+<input type="hidden" name="cof" value="GALT:#0000aa;GL:1;DIV:#FFFFFF;VLC:0000ff;AH:center;BGC:FFFFFF;LBGC:F7EFD8;ALC:0000ff;LC:0000ff;T:000000;GFNT:0000ff;GIMP:0000ff;FORID:11">
+<input type="hidden" name="hl" value="zh-CN">
+<!-- SiteSearch Google -->
+</form>
+</div>
+<!-- end: search box -->
+
+<!-- begin: 广1 -->
+<div id="topad">
+<script type="text/javascript"><!--
+google_ad_client = "pub-5801877696325956";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text_image";
+//2007-05-10: JavaNB_Article_View_728x90
+google_ad_channel = "6422951369";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "776655";
+google_color_text = "000000";
+google_color_url = "776655";
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<!-- end: 广1 -->
+
+<!-- begin: 广告2 --> 
+<!-- div class="topad">顶部广告2</div --> 
+<!-- end: 广告2 -->
+
+<!-- #EndEditable --> 
+
+
+<!-- #BeginEditable "textbody" -->
+<!-- begin: 正文 -->
+<div class="abody">
+
+<p align="left">当前页面: <a href="http://www.javanb.com/index-doc.html">开发资料首页</a> → <a href="http://www.javanb.com/netbeans/index.html">Netbeans 专题</a> → <b>Refactoring in a BPEL Module Project Using NetBeans Enterprise Pack </b></p>
+<h1>Refactoring in a BPEL Module Project Using NetBeans Enterprise Pack </h1>
+<blockquote><b>摘要</b>: This tutorial explores refactoring in NetBeans Enterprise Pack. The NetBeans IDE with NetBeans Enterprise Pack supports XML schema, Business Process Execution Language (BPEL), and Web Service Description Language (WSDL) source file refactoring. You can use refactoring to rename and safely delete local and global components.  </blockquote>
+
+<div style="float:left;margin:4px;">
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-5801877696325956";
+/* JavaNB_Article_View_300x250 */
+google_ad_slot = "5136578536";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+<h3 class="tutorial">Prerequisite</h3>
+<p>This tutorial assumes that you have some basic knowledge of, or programming experience with, the NetBeans IDE.</p>
+
+<!-- ======================================================================================== -->
+<h3 class="tutorial">System Requirements</h3>
+<p> This tutorial assumes that your system meets the requirements specified in the <em>System Requirements </em> topic of the <a href="http://www.netbeans.org/community/releases/55/entpack_relnotes.html">NetBeans Enterprise Pack 5.5 Release Notes</a>. </p>
+
+<h3 class="tutorial">Software Needed for the Tutorial</h3>
+<p>Before you begin, you must install the following software on your computer: </p>
+<ul>
+  <li>NetBeans IDE 5.5 with NetBeans Enterprise Pack 5.5 (<a href="http://www.netbeans.org/products/index.html" target="_blank">download</a>)</li>
+</ul>
+<!-- ======================================================================================== -->
+<h3 class="tutorial">Contents</h3>
+<ul>
+<li class="tut"><a href="http://www.javanb.com/netbeans/1/19834.html#creatingthesampleproject" title="Creating the SynchronousSample Project">Creating the SynchronousSample Project</a></li>
+<li class="tut"><a href="http://www.javanb.com/netbeans/1/19834.html#renamingschemacomponents" title="Renaming XML Schema Components">Renaming XML Schema Components</a>
+<ul>
+<li class="tut"><a href="http://www.javanb.com/netbeans/1/19834.html#exploringxmlrefactoringwindow" title="Exploring the XML Refactoring Window">Exploring the XML Refactoring Window</a></li>
+</ul></li>
+<li class="tut"><a href="http://www.javanb.com/netbeans/1/19834.html#renamingwsdlcomponents" title="Renaming WSDL Components">Renaming WSDL Components</a></li>
+<li class="tut"><a href="http://www.javanb.com/netbeans/1/19834.html#safelydeletingcomponents" title="Safely Deleting Components">Safely Deleting Components</a>
+<ul>
+<li class="tut"><a href="http://www.javanb.com/netbeans/1/19834.html#deletingcomponentswithreferences" title="Deleting Components With References">Deleting Components With References</a></li>
+<li class="tut"><a href="http://www.javanb.com/netbeans/1/19834.html#deletingcomponentswithoutreferences" title="Deleting Components Without References">Deleting Components Without References</a></li>
+</ul></li>
+<li class="tut"><a href="http://www.javanb.com/netbeans/1/19834.html#undoingredoing" title="Undoing and Redoing Refactoring Actions">Undoing and Redoing Refactoring Actions</a></li>
+<li class="tut"><a href="http://www.javanb.com/netbeans/1/19834.html#summary" title="Summary">Summary</a></li>
+</ul>
+</div>
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19834.html#top">top</a></p>
+<br>
+
+<!-- ======================================================================================== -->
+<h2><a name="creatingthesampleproject"></a>Creating the SynchronousSample Project</h2>
+<p>For this tutorial, you will use the Synchronous BPEL Process sample project.</p>
+<ol>
+<li class="tut">From the IDE's main menu, choose File &gt; New Project.</li>
+<li class="tut">In the Categories list, expand the <tt>Samples</tt> node and select the <tt>Service&nbsp;Oriented&nbsp;Architecture</tt> node.</li>
+<li class="tut">In the Projects list, select Synchronous&nbsp;BPEL&nbsp;Process. </li>
+<li class="tut">Click Next.</li>
+<li class="tut">Accept the defaults for the Project Name, <tt>SynchronousSample</tt> and Project Location or change the values to suit your preferences.</li>
+<li class="tut">Click Finish. <br>
+The Projects window now contains two project nodes: a BPEL Module project node labeled <tt>SynchronousSample</tt>, and a Composite Application project node labeled <tt>SynchronousSampleApplication</tt>.</li>
+</ol>
+
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19834.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="renamingschemacomponents"></a>Renaming XML Schema Components</h2>
+<ol>
+<li class="tut">In the Projects window, expand the <tt>SynchronousSample</tt> project node and the <tt>Process&nbsp;Files</tt> node.</li>
+<li class="tut">Double-click the <tt>SynchronousSample.xsd</tt> node.<br>
+The IDE opens the Schema view for the XML schema file.</li>
+<li class="tut">In the Schema view, the first column, select the <tt>Elements</tt> node.<br>
+The IDE shows the <tt>typeA</tt> element in the second column of the view.</li>
+<li class="tut">In the second column, select the <tt>typeA</tt> node, right-click and choose Refactor &gt; Rename.<br>
+The Rename dialog box opens.</li>
+<li class="tut">In the New Name field, type <tt>typeB</tt>.</li>
+<li class="tut">Make sure the Preview All Changes checkbox is selected and click Next.<br>
+The Preview All Changes checkbox specifies that you want to review the refactoring changes before applying those changes.<br>
+The XML Refactoring window opens in the bottom part of the IDE. <br>
+<b>Note:</b> Before you proceed to the next step, review the information in <a href="http://www.javanb.com/netbeans/1/19834.html#exploringxmlrefactoringwindow" title="Exploring the XML Refactoring Window">Exploring the XML Refactoring Window</a> below.</li>
+<li class="tut">In the XML Refactoring window, click Do Refactoring to execute the rename action.<br>
+When the refactoring is complete, <tt>typeA</tt> has been renamed to <tt>typeB</tt> and all references to that schema component have been changed to reflect the new name.</li>
+</ol>
+
+<h3 class="tutorial"><a name="exploringxmlrefactoringwindow"></a>Exploring the XML Refactoring Window</h3>
+<p>Let's explore the XML Refactoring window as it appears after you initiated the Rename action from the Refactor menu.</p>
+<p align="center"><a href="http://www.netbeans.org/images/articles/ep-refactoring/refactoring-rename-xml.png" title="XML Refactoring window for Rename in XSD, click to enlarge" target="_blank"><img src="./Refactoring in a BPEL Module Project Using NetBeans Enterprise Pack_files/refactoring-rename-xml-small.png" alt="XML Refactoring window for Rename in XSD, click to enlarge" border="0"><br>Click to enlarge</a></p>
+
+<p>Notice the following:</p>
+<ul>
+<li class="tut">The status bar informs you that 2 usages were found for the <tt>typeA</tt> element.</li>
+<li class="tut">The tree pane of the window shows all usages of the <tt>typeA</tt> element.<br>
+If you select a node in the tree pane, the IDE highlights the corresponding node in the graph pane.</li>
+<li class="tut">The graph pane shows a graphical representation of the information in the tree pane.<br>
+If you select a node in the graph pane, the IDE highlights the corresponding node in the tree pane.<br>
+You can expand and collapse file nodes in the graph pane by selecting
+the node, right-clicking and choosing Collapse or Expand from the
+pop-up menu.</li>
+<li class="tut">The list of files where the IDE found usages of <tt>typeA</tt> includes the <tt>SynchronousSample.wsdl</tt> file because it contains references to the <tt>typeA </tt> element.</li>
+</ul>
+
+<p><b>Navigating to XML Schema Editor Views From the XML Refactoring Window</b></p>
+<p>You can use the right-click pop-up menu from the graph pane to navigate to other views in the XML schema editor.</p>
+<ul>
+<li class="tut">In the graph pane of the XML Refactoring window, select one of the <tt>References "typeA"</tt> nodes, right-click and choose Go To Source.<br>
+The IDE opens the <tt>SynchronousSample.xsd</tt> file in the Source view of the editor and highlights the first line of the block for the <tt>typeA</tt> element. </li>
+<li class="tut">In the graph pane of the XML Refactoring window, select the <tt>typeA</tt> node, right-click and choose Go To &gt; Schema.<br>
+The editor tab for the <tt>SynchronousSample.xsd</tt> file becomes the active tab with the <tt>typeA</tt> node highlighted in the second column of the Schema view.</li>
+</ul>
+
+<p><b>Productivity Tips</b></p>
+<p>Use the information below to zoom, pan, and drag the graph pane of the XML Refactoring window.</p>
+<ul>
+<li class="tut">To zoom out: right-click in the graphic and drag up.</li>
+<li class="tut">To zoom in: right-click in the graphic and drag down.</li>
+<li class="tut">To pan: click and drag in any direction.</li>
+<li class="tut">To drag a node: click and drag the node.</li>
+</ul>
+
+<p>If you drag a node out of the display area, you can bring it back using one of the following methods:</p>
+<ul>
+<li class="tut">Pan in the direction of the node until it is visible in the display area again.</li>
+<li class="tut">Zoom out until the node is visible in the display area.</li>
+<li class="tut">Click the Refresh button in the XML Refactoring window toolbar.</li>
+</ul>
+
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19834.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="renamingwsdlcomponents"></a>Renaming WSDL Components</h2>
+
+<ol>
+<li class="tut">In the Projects window, expand the <tt>SynchronousSample</tt> project node and the <tt>Process&nbsp;Files</tt> node.</li>
+<li class="tut">Double-click the <tt>SynchronousSample.wsdl</tt> node.<br>
+If the file was already open in the IDE, the tab for <tt>SynchronousSample.wsdl</tt> becomes the active tab in the editor.<br>
+If the file was not open in the IDE, the IDE opens the WSDL view of the WSDL editor for the WSDL file.</li>
+<li class="tut">If the WSDL view is not the active view, click the WSDL button in the editor toolbar.</li>
+<li class="tut">In the WSDL view, under the <tt>Messages</tt> &gt; <tt>responseMessage</tt> node, select the <tt>resultType</tt> node.</li>
+<li class="tut">Right-click the selection and choose Refactor &gt; Rename.<br>
+The Rename dialog box opens.</li>
+<li class="tut">In the New Name field, type <tt>outputType</tt>.</li>
+<li class="tut">Leave the Preview All Changes checkbox selected and click Next.<br>
+The Preview All Changes checkbox specifies that you want to review the refactoring changes before applying those changes.<br>
+The XML Refactoring window opens in the bottom part of the IDE. <br>
+<p align="center"><a href="http://www.netbeans.org/images/articles/ep-refactoring/refactoring-rename-wsdl.png" title="XML Refactoring window for Rename in WSDL, click to enlarge" target="_blank"><img src="./Refactoring in a BPEL Module Project Using NetBeans Enterprise Pack_files/refactoring-rename-wsdl-small.png" alt="XML Refactoring window for Rename in WSDL, click to enlarge" border="0"></a></p></li>
+Notice that the XML Refactoring window shows the usages of <tt>resultType</tt>, in this case, one.<br>
+The list of files containing usages include <tt>SynchronousSample.bpel</tt>, which contains references to the <tt>resultType</tt> message.<br>
+<b>Note:</b> <a href="http://www.javanb.com/netbeans/1/19834.html#exploringxmlrefactoringwindow" title="Exploring the XML Refactoring Window">Exploring the XML Refactoring Window</a> provides additional information about the XML Refactoring window.
+<li class="tut">In the XML Refactoring window, click Do Refactoring to execute the rename action.<br>
+When the refactoring is complete, <tt>resultType</tt> has been renamed to <tt>outputType</tt> and all references to that component have been changed to reflect the new name.</li>
+</ol>
+
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19834.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="safelydeletingcomponents"></a>Safely Deleting Components</h2>
+
+<p>When you use the refactoring delete function to delete a component
+with usages in multiple project files, the IDE will find all usages of
+that component in the project and show you a preview of the refactoring
+action, even if you chose not to preview the changes. When you use the
+refactoring delete function to delete a component with usages in a
+single project file, you cannot delete the component without previewing
+the refactoring action.</p>
+
+<h3 class="tutorial"><a name="deletingcomponentswithreferences"></a>Deleting Components With References</h3>
+<p>In this procedure, you will use the refactoring delete function to
+see that the IDE forces you to review refactoring changes for
+components that are referenced in other files in your project.</p>
+<ol>
+<li class="tut">If the <tt>SynchronousSample.xsd</tt> file is not open in the IDE, open it now.</li>
+<li class="tut">In the first column of the Schema view, select the <tt>Elements</tt> node and then in the second column, right-click the <tt>typeB</tt> node and choose Refactor &gt; Safely&nbsp;Delete.<br>
+The Safe Delete dialog box opens.</li>
+<li class="tut">Clear the Preview All Changes checkbox and click Next. <br>
+Even though you cleared the Preview All Changes checkbox, the Safe Delete dialog box is now updated to show a warning.</li>
+<li class="tut">Click Find Usages.<br>
+The XML Usages window shows all usages of <tt>typeB</tt>, in this case, 2 usages, as shown in the status bar.<br>
+The 2 usages are in the <tt>SynchronousSample.wsdl</tt> file.</li>
+<li class="tut">Click Rerun Delete <tt>typeB</tt>.<br>
+The Safe Delete dialog box opens again.</li>
+<li class="tut">In the Safe Delete dialog box, click Cancel.<br>
+<b>Note:</b> At this point, you are canceling the delete action because
+you will use this element to review undo and redo functionality in
+refactoring.</li>
+</ol>
+
+<h3 class="tutorial"><a name="deletingcomponentswithoutreferences"></a>Deleting Components Without References</h3>
+<p>In this procedure, you will create a new schema component that has
+no references and then use refactoring to delete that schema component.</p>
+
+<ol>
+<li class="tut">In the first column of the Schema view of <tt>SynchronousSample.xsd</tt>, select the <tt>Elements</tt> node, right-click and choose Add&nbsp;Element from the pop-up menu.<br>
+The Element dialog box opens.</li>
+<li class="tut">Accept the defaults in the Element dialog box and click OK.<br>
+The second column of the Schema view now has an element node labeled <tt>newElement</tt>.</li>
+<li class="tut">In the second column of the Schema view, right-click the <tt>newElement</tt> node and choose Refactor &gt; Safely&nbsp;Delete.<br>
+The Safe Delete dialog box opens. </li>
+<li class="tut">Clear the Preview All Changes checkbox and click Next. <br>
+The IDE executes the refactoring and deletes <tt>newElement</tt>. </li>
+</ol>
+
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19834.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="undoingredoing"></a>Undoing and Redoing Refactoring Actions</h2>
+
+<p>After you perform a refactoring action, you can undo that action. If
+you then decide you want to "undo" the undo, you can redo the action.</p>
+<p><b>Note:</b> To undo refactoring actions, you must invoke the action
+from the Refactoring menu that appears in the pop-up menu, not from the
+IDE's Edit menu.</p>
+<ol>
+<li class="tut">To undo the safe delete of the <tt>newElement</tt> schema component, in the second column of the Schema view of <tt>SynchronousSample.xsd</tt>, right-click the <tt>typeB</tt> node and choose Refactor &gt; Undo&nbsp;[Safe&nbsp;Delete].<br>
+The IDE reverses the earlier safe delete that you invoked from the Refactoring menu and restores <tt>newElement</tt>.</li>
+<li class="tut">In the second column of the Schema view of <tt>SynchronousSample.xsd</tt>, right-click the <tt>typeB</tt> node and choose Refactor &gt; Rename.<br>
+The Rename dialog box opens.</li>
+<li class="tut">In the New Name field, type <tt>typeA</tt>.</li>
+<li class="tut">Clear the Preview All Changes checkbox and click Next.<br>
+The IDE renames the <tt>typeB</tt> element to <tt>typeA</tt>.</li>
+<li class="tut">To undo the refactoring rename action, in the second column, select the <tt>typeA</tt> node, right-click and choose Refactor &gt; Undo&nbsp;[Rename].<br>
+The IDE reverses the rename that you invoked from the Refactoring menu and restores the <tt>typeB</tt> name of the element.</li>
+<li>To verify that the last undo action worked correctly, in the second column of the Schema view, right-click the <tt>typeB</tt> node and choose Find Usages.<br>
+The XML Usages window opens. Notice that the references all correctly refer to <tt>typeB</tt>.<br>
+In the tree pane of the XML Usages window, double-click the <tt>inputType</tt> and <tt>outputType</tt> nodes to see the references in the Source view.</li>
+</ol>
+
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19834.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="summary"></a>Summary</h2>
+<p>In this tutorial, you explored refactoring in NetBeans Enterprise
+Pack. You created a new BPEL Module project and used refactoring
+functionality to rename and delete components with and without
+references. You also learned how to undo and redo refactoring actions.</p>
+<br>
+        <div class="feedback-box"><a href="http://www.netbeans.org/about/contact_form.html?to=5&subject=Feedback:%20Refactoring%20in%20a%20BPEL%20Module%20Project%20Using%20NetBeans%20Enterprise%20Pack">Send Us Your Feedback</a></div>
+        <br style="clear:both;">
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19834.html#top">top</a></p>
+
+<!-- End Content Area -->
+</div></div><!-- end IE hack -->
+
+
+ 
+<br>
+<a href="http://www.javanb.com/netbeans/index.html">↑返回目录</a> <br>
+前一篇: <a href="http://www.javanb.com/netbeans/1/19833.html">Setting Up Page Navigation </a> <br> 
+后一篇: <a href="http://www.javanb.com/netbeans/1/19835.html">Porting a Legacy Web Application to NetBeans </a> 
+
+
+<!-- end: 正文 --> 
+<!-- #EndEditable --> 
+
+<!-- begin: footer --> 
+<div id="footer"><center>
+<a href="http://www.javanb.com/index.html">首页</a> | 
+<a href="http://www.javanb.com/java-sitemap-bd.html">全站 Sitemap</a> | 
+<a href="http://www.javanb.com/contact.html">联系我们</a> | 
+<a href="http://www.javanb.com/netbeans/1/19834.html#" onclick="this.style.behavior=&#39;url(#default#homepage)&#39;;this.setHomePage(&#39;http://www.javanb.com/&#39;);return(false);">设为首页</a> | 
+<a href="http://www.javanb.com/netbeans/1/19834.html#" onclick="window.external.AddFavorite(&#39;http://www.javanb.com/&#39;, &#39;Java 编程资料牛鼻站&#39;);return false;">收藏本站</a> 
+<br>版权所有 Copyright © 2006-2007, Java 编程资料牛鼻站, All rights reserved <br> &nbsp; 
+</center></div>
+<!-- end: footer --> 
+
+
+
+<div id="sbi_camera_button" class="sbi_search" style="left: 0px; top: 0px; position: absolute; width: 29px; height: 27px; border: none; margin: 0px; padding: 0px; z-index: 2147483647; display: none; "></div></body><!-- #EndTemplate --></html>

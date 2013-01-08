@@ -1,0 +1,440 @@
+
+<!-- saved from url=(0043)http://www.javanb.com/netbeans/1/19725.html -->
+<html><!-- #BeginTemplate "/Templates/article.dwt" --><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<!-- #BeginEditable "doctitle" -->
+<title>A Simple Synchronous BPEL Process </title>
+<meta name="keywords" content="Eclipse, J2EE, J2EE, J2ME, JSP 等各种开发资源,netbeans 编程, netbeans 技术, netbeans 源码, netbeans 文档 ">
+<meta name="description" content="This tutorial provides an overview of the sample project, SynchronousSample, and illustrates deploying, executing and testing a synchronous BPEL process using the NetBeans Enterprise Pack 5.5 bundle with all the necessary runtimes. ">
+<!-- #EndEditable --> 
+<meta name="robots" content="all">
+
+<link href="./A Simple Synchronous BPEL Process_files/style1.css" type="text/css" rel="stylesheet">
+<style type="text/css"></style></head>
+
+<body bgcolor="#FFFFFF"><div id="bd" align="center">
+
+<!-- begin: 头部导航 -->
+<div id="tp">
+<div id="tp_l">
+<div id="tp_lt"><a href="http://www.javanb.com/" title="Java 编程资料牛鼻网, Java 程序员论坛, Java 编程资料" class="nobd"><img src="./A Simple Synchronous BPEL Process_files/javanb.gif" width="250" height="60" border="0" title="Java 编程资料牛鼻网"></a></div>
+</div>
+<div id="tp_r">
+<div id="tp_rt">
+<!-- #BeginEditable "top468" -->
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-5801877696325956";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text_image";
+//2007-05-10: JavaNB_Article_View_468x60
+google_ad_channel = "0139239488";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "776655";
+google_color_text = "000000";
+google_color_url = "776655";
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><!-- #EndEditable --> 
+</div>
+</div>
+</div>
+
+<table cellspacing="0" cellpadding="0" width="100%" border="0">
+<tbody><tr>
+<td>
+<div id="Nav">
+<div class="ltab"><div class="tabContent"><a href="http://www.javanb.com/">首页</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://www.javanb.com/bbs/">论坛</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://book.javanb.com/">图书</a></div></div>
+<div class="tab"><div class="tabContent selected"><a href="http://www.javanb.com/index-doc.html">开发资料</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://doc.javanb.com/">在线文档</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://url.javanb.com/">网址</a></div></div>
+<div class="tab"><div class="tabContent"><a href="http://download.javanb.com/">下载</a></div></div>
+<div class="rtab"><div class="tabContent"><a href="http://www.javanb.com/contact.html">联系我们</a></div>
+</div>
+</div>
+</td></tr>
+<tr><td>
+<div id="NavSub">&nbsp;<a href="http://www.javanb.com/news/index.html">新闻</a>│<a href="http://www.javanb.com/java/index.html">Java</a>│<a href="http://www.javanb.com/javascript/index.html">JavaScript</a>│<a href="http://www.javanb.com/eclipse/index.html">Eclipse</a>│<a href="http://www.javanb.com/eclipse-eng/index.html">Eclipse 英文</a>│<a href="http://www.javanb.com/j2ee/index.html">J2EE</a>│<a href="http://www.javanb.com/j2me/index.html">J2ME</a>│<a href="http://www.javanb.com/j2se/index.html">J2SE</a>│<a href="http://www.javanb.com/jsp/index.html">JSP</a>│<a href="http://www.javanb.com/netbeans/index.html">Netbeans</a>│<a href="http://www.javanb.com/hibernate/index.html">Hibernate</a>│<a href="http://www.javanb.com/jbuilder/index.html">JBuilder</a>│<a href="http://www.javanb.com/spring/index.html">Spring</a>│<a href="http://www.javanb.com/struts/index.html">Struts</a></div>
+</td>
+</tr>
+</tbody></table>
+<!-- end: 头部导航 -->
+
+<!-- #BeginEditable "topgg" -->
+
+<!-- begin: search box -->
+<div id="topad">
+<form method="get" action="http://www.javanb.com/ggres.php" target="_top">
+<!-- SiteSearch Google -->
+<b>站内搜索</b>: 请输入搜索关键词 
+<input type="hidden" name="domains" value="javanb.com">
+<input type="text" name="q" size="31" maxlength="255" value="" id="sbi" class="inputclass">
+<input type="submit" name="sa" value="搜索" id="sbb" class="buttonclass">
+<input type="hidden" name="sitesearch" value="javanb.com">
+<input type="hidden" name="client" value="pub-5801877696325956">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="channel" value="0487632749">
+<input type="hidden" name="ie" value="GB2312">
+<input type="hidden" name="oe" value="GB2312">
+<input type="hidden" name="cof" value="GALT:#0000aa;GL:1;DIV:#FFFFFF;VLC:0000ff;AH:center;BGC:FFFFFF;LBGC:F7EFD8;ALC:0000ff;LC:0000ff;T:000000;GFNT:0000ff;GIMP:0000ff;FORID:11">
+<input type="hidden" name="hl" value="zh-CN">
+<!-- SiteSearch Google -->
+</form>
+</div>
+<!-- end: search box -->
+
+<!-- begin: 广1 -->
+<div id="topad">
+<script type="text/javascript"><!--
+google_ad_client = "pub-5801877696325956";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text_image";
+//2007-05-10: JavaNB_Article_View_728x90
+google_ad_channel = "6422951369";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "776655";
+google_color_text = "000000";
+google_color_url = "776655";
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<!-- end: 广1 -->
+
+<!-- begin: 广告2 --> 
+<!-- div class="topad">顶部广告2</div --> 
+<!-- end: 广告2 -->
+
+<!-- #EndEditable --> 
+
+
+<!-- #BeginEditable "textbody" -->
+<!-- begin: 正文 -->
+<div class="abody">
+
+<p align="left">当前页面: <a href="http://www.javanb.com/index-doc.html">开发资料首页</a> → <a href="http://www.javanb.com/netbeans/index.html">Netbeans 专题</a> → <b>A Simple Synchronous BPEL Process </b></p>
+<h1>A Simple Synchronous BPEL Process </h1>
+<blockquote><b>摘要</b>: This tutorial provides an overview of the sample project, SynchronousSample, and illustrates deploying, executing and testing a synchronous BPEL process using the NetBeans Enterprise Pack 5.5 bundle with all the necessary runtimes.  </blockquote>
+
+<div style="float:left;margin:4px;">
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-5801877696325956";
+/* JavaNB_Article_View_300x250 */
+google_ad_slot = "5136578536";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+<!-- ======================================================================================== -->
+<h3 class="tutorial">Software Needed for the Tutorial</h3>
+<p>Before you begin, you must install the following software on your computer: </p>
+<ul>
+<li>NetBeans IDE 5.5 with NetBeans Enterprise Pack 5.5 (<a href="http://www.netbeans.org/products/index.html">download</a>) </li>
+<li>In order to complete the deployment steps in this tutorial, you must have Sun Java System Application Server Platform Edition 9 Update 1. This Application Server is bundled with the NetBeans Enterprise Pack 5.5 download.</li>
+</ul>
+<!-- ======================================================================================== -->
+<h3 class="tutorial">Contents</h3>
+<ul>
+<li><a href="http://www.javanb.com/netbeans/1/19725.html#ConfiguringtheTutorialEnvironment">Configuring the Tutorial Environment</a></li>
+<li><a href="http://www.javanb.com/netbeans/1/19725.html#Openingthesampleproject">Opening the SynchronousSample Project</a></li>
+<li><a href="http://www.javanb.com/netbeans/1/19725.html#exploringbpelprj">Exploring the BPEL Project in the Projects Window</a></li>
+<li><a href="http://www.javanb.com/netbeans/1/19725.html#exploringthewsdl">Exploring the WSDL Editor in the Source Editor</a></li>
+<li><a href="http://www.javanb.com/netbeans/1/19725.html#addingif">Adding If Activity to the Design View</a></li>
+<li><a href="http://www.javanb.com/netbeans/1/19725.html#addingassign">Adding Assign Activity to the Design View</a> </li>
+<li><a href="http://www.javanb.com/netbeans/1/19725.html#deploying">Deploying the project to the Application Server</a></li>
+<li><a href="http://www.javanb.com/netbeans/1/19725.html#creatingtestdriver">Creating a Test Driver</a> </li>
+<li><a href="http://www.javanb.com/netbeans/1/19725.html#testing">Testing the SynchronousSampleApplication</a></li>
+</ul>
+</div>
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19725.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="ConfiguringtheTutorialEnvironment"></a>Configuring the Tutorial Environment</h2>
+<p>Before you can deploy your application, the Sun Java System Application Server and JBI runtime must be configured correctly and running. </p>
+<p> <b>To configure the tutorial environment: </b> </p>
+<ol>
+<li>Click the Runtime tab to open the Runtime window. </li>
+<li>In the Runtime window, expand the <tt>Servers</tt> node. </li>
+<li>If the <tt>Servers</tt> node already contains a <tt>Sun Java System Application Server 9</tt> node, then go to step 5. </li>
+<li>If the <tt>Servers</tt> node does not contain a <tt>Sun Java System Application Server 9</tt> node, then do the following to add an application server: <br>
+<ol type="a">
+<li>Right-click the <tt>Servers</tt> node and choose Add Server from the pop-up menu. <br>
+The Add Server Instance dialog box opens. </li>
+<li>In the Choose Server page, from the Server drop-down list, select Sun Java System Application Server. </li>
+<li>(Optional) In the Name field, accept the default value or type the name you want to use to identify the server in the IDE. </li>
+<li>Click Next. <br>
+The Platform Location Folder page opens. </li>
+<li>In the Platform Location field, use the Browse button to navigate to and select the Application Server installation location. <br>
+If you accepted the default values during the installation, the location is <tt>C:\Sun\Appserver</tt>. </li>
+<li>Select the Register Local Default Domain radio button. </li>
+<li>Click Next. </li>
+<li>Supply the user name and password for the domain's administrator. <br>
+If you accepted the default values during the installation, the user name is admin and the password is adminadmin. </li>
+<li>Click Finish. </li>
+</ol>
+</li>
+<li>In the Runtime window, right-click the <tt>Sun Java System Application Server 9</tt> node and choose Start. <br>
+If the Start option is not available, the server is already running and you can skip the next step. </li>
+<li>Wait until the following message appears in the Output window: <br>
+Application server startup complete. <br>
+When the server is running, the IDE displays a green arrow badge on the S<tt>un Java System Application Server 9</tt> node. </li>
+</ol>
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/sjsasrunning.png" alt="Application Server Started"> </p>
+<p align="center"> <a href="http://www.javanb.com/netbeans/1/19725.html#top">top</a> </p>
+<!-- ======================================================================================== -->
+<h2><a name="Openingthesampleproject"></a>Opening the SynchronousSample Project</h2>
+<ol>
+<li>From the IDE's main menu, choose File &gt;New Project. <br>
+The New Project wizard opens. </li>
+<li>In the Categories list, select <tt>Samples&gt;Service Oriented Architecture</tt>. </li>
+<li>In the Projects list, select <tt>Synchronous BPEL Process</tt>.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/newprojectn.png" alt="Sample BPEL Module project selected"> </p>
+</li>
+<li>Click Next. </li>
+<li>In the Project Name field, type <tt>SynchronousSample</tt>.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/prjnameandlocation.png" alt="Typing project name"> </p>
+</li>
+<li>(Optional) In the Project Location field, use the Browse button to navigate to and select a different folder where the IDE will store the project files.</li>
+<li>Click Finish. <br>
+The Projects window now contains two project nodes: one for a BPEL project called <tt>SynchronousSample</tt>, and one for a Composite application project called <tt>SynchronousSampleApplication</tt>. </li>
+<li>There is a broken reference in the <tt>SynchronousSampleApplication</tt> node. This is normal behavior. The Composite Application has a dependency on the JBI Module.<br>
+You can resolve the broken reference later in the <a href="http://www.javanb.com/netbeans/1/19725.html#deploying">Deploying the Project to the Application Server</a> section.</li>
+</ol>
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19725.html#top">top</a></p>
+<!-- ======================================================================================== -->
+<h2><a name="exploringbpelprj"></a>Exploring the BPEL Project in the Projects Window</h2>
+<ol>
+<li>In the Projects window, expand the <tt>SynchronousSample</tt> node, then expand the <tt>Process Files</tt> node. <br>
+The <tt>Process Files</tt> node contains these items:
+<ul>
+<li><tt>SynchronousSample.bpel</tt>, the BPEL process </li>
+<li><tt>SynchronousSample.wsdl</tt>, the process web service interface. </li>
+<li><tt>SynchronousSample.xsd</tt>, the schema file.</li>
+</ul>
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/projectview.png" alt="SynchronousSample Project view"> </p>
+</li>
+<li>Double-click the <tt>SynchronousSample.bpel</tt> node.<br>
+Notice the following:
+<ul>
+<li>The Source Editor contains a tab for <tt>SynchronousSample.bpel</tt>. </li>
+<li>The <tt>SynchronousSample</tt> diagram is shown in the Design view. <br>
+The Design view is the business processes visual designer. In this view, you can visually model a business process. The BPEL Design tool automatically generates BPEL code that corresponds to the visual design. </li>
+<li>The Palette of BPEL elements opens to the right of the Source Editor.</li>
+<li>The Navigator window shows the BPEL logical view of the BPEL process. </li>
+</ul>
+<p align="center"> <a href="http://www.netbeans.org/images/articles/synchronousample/designview.png" target="_blank"><img src="./A Simple Synchronous BPEL Process_files/designview-tn.png" alt="SynchronousSample BPEL Design view" border="0"><br>
+Click to enlarge</a> </p>
+</li>
+</ol>
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19725.html#top">top </a></p>
+<!-- ======================================================================================== -->
+<h2><a name="exploringthewsdl"></a>Exploring the WSDL Editor in the Source Editor </h2>
+<p>The WSDL Editor enables you create and edit Web Services Description Language (WSDL) files. The WSDL editor includes a Design view and a Source view. </p>
+<p><b>To see the Design View</b>:</p>
+<ol>
+<li>In the Projects window, double-click the <tt>SynchronousSample.wsdl</tt> file. <br>
+The Source Editor now contains a tab for <tt>SynchronousSample.wsdl</tt> file. <br>
+This WSDL file is open in the Design view.</li>
+<li>In the Design view, the WSDL file appears as a tree component where you can configure the file's elements and attribute.<br>
+<br>
+<p align="center"> <a href="http://www.netbeans.org/images/articles/synchronousample/wsdlview.png" target="_blank"><img src="./A Simple Synchronous BPEL Process_files/wsdlview-tn.png" alt="SynchronousSample WSDL"><br>
+Click to enlarge</a> </p>
+</li>
+</ol>
+<p><b>To see the Source View:</b><br>
+</p>
+<p>Click the Source button. <br>
+The underlying XML source code appears in the Source view.</p>
+<p align="center"> <a href="http://www.netbeans.org/images/articles/synchronousample/wsdlsourceview.png" target="_blank"><img src="./A Simple Synchronous BPEL Process_files/wsdlsourceview-tn.png" alt="SynchronousSample WSDL Source view"><br>
+Click to enlarge</a> </p>
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19725.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="addingif"></a>Adding If Activity to the Design View </h2>
+<ol>
+<li>In the Projects window, expand the <tt>SynchronousSample</tt> node, the <tt>Process Files</tt> node and double-click the <tt>SynchronousSample.bpel</tt> node. <br>
+The IDE displays the <tt>SynchronousSample.bpel</tt> diagram in the Design view. </li>
+<li>In the Source Editor, click the Design view. </li>
+<li> In the Structured Activities section of the Palette, select the If icon and drag your selection to the design area between the Start and Assign activities. <br>
+The IDE provides you with visual clues to show you where you can drop the selection. <br>
+This action places an If activity called <code>If1</code> in the Design view.<br>
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/ifadded.png" alt="If activity added"> </p>
+</li>
+<li>In the Design view, click the <tt>If1</tt> activity.<br>
+The BPEL Mapper appears at the bottom of the IDE. <br>
+If the BPEL Mapper is not visible, choose Window &gt; BPEL Mapper.<br>
+You use the BPEL Mapper to define the Boolean condition. <br>
+Notice the sections at the top of the BPEL Mapper make up the Method Palette.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/mapper.png" alt="BPEL Mapper"> </p>
+</li>
+<li>From the Method Palette, click the Operator and select ==EQUAL method <img src="./A Simple Synchronous BPEL Process_files/equal.png" alt="Equal">. <br>
+The == Equal method appears in the middle portion of the BPEL Mapper which is the Editor. </li>
+<li>From the Method Palette, click the String method and select String Literal <img src="./A Simple Synchronous BPEL Process_files/string.png" alt="String Literal"> from the String drop-down list.<br>
+The String Literal box appears in the Editor. </li>
+<li>Type <tt>Hello World</tt> in the string literal method and press the Enter key. </li>
+<li>Move the string literal box and the == Equal box to the middle of the editor.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/stringinserted.png" alt="Equal and String Literal inserted"> </p>
+</li>
+<li>In the left side of the BPEL Mapper, under <tt>Variables</tt>, expand <tt>inputVar</tt> &gt; <tt>inputType</tt>.<br>
+<tt>paramA</tt> appears under <tt>InputType</tt>. </li>
+<li>Drag the <tt>paramA</tt> onto the any1 part of the == Equal method. </li>
+<li> Select the small square on the right side of the string literal box. When the hand cursor is visible, drag a connecting line to the any2 part of the == Equal method.</li>
+<li>From the == Equal method, drag the return boolean onto the Result.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/mapping.png" alt="Mapping"> </p>
+</li>
+</ol>
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19725.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="addingassign"></a>Adding Assign Activity to the Design View </h2>
+<ol>
+<li>In the Design view, drag the existing <tt>Assign1</tt> activity to the <tt>If1</tt> activity. Place this assign activity between the two large X icons in the <tt>If1</tt> activity area.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/assigninif.png" alt="Assign activity added"> </p>
+</li>
+<li>Open the Basic Activities section of the Palette and drag an Assign activity to the design area, place this second assign activity to the right of the existing assign.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/assign2inif.png" alt="Second Assign activity added"> </p>
+</li>
+<li>Select new <tt>Assign2</tt> activity. </li>
+<li>From the Method Palette of the Mapper, click String method and select the concat <img src="./A Simple Synchronous BPEL Process_files/concatnew.png" alt="Concat"> from the String drop-down list.<br>
+The concat method appears in the middle portion of the Editor. </li>
+<li>Double-click the first field in the concat box and type <tt>Hello</tt> followed by space in the first string. Press the Enter key. </li>
+<li>From the left side of the Mapper, expand <tt>inputVar</tt> &gt; <tt>inputType</tt>.</li>
+<li>Drag <tt>paramA</tt> onto the string2 part of the concat method, the second field.</li>
+<li>From the right of the Mapper, expand <tt>outputVar</tt> &gt; <tt>resultType</tt>. </li>
+<li>Drag the return string from the concat method onto the <tt>paramA</tt> under <tt>outputVar</tt> &gt; <tt>resultType</tt>.<br>
+This concatenates the string Hello to the input and copies the statement into the output.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/concathellonew.png" alt="String Hello concatenated"> </p>
+</li>
+</ol>
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19725.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="deploying"></a>Deploying the project to the Application Server</h2>
+<p>Before you deploy the BPEL project, you must add the JBI module to the deployment project. Deploying the project makes the service assembly available to the application server, thus allowing its service units to be run.</p>
+<p> <strong>To add the JBI module: </strong> </p>
+<ol>
+<li>In the Projects window, right-click the <tt>SynchronousSampleApplication</tt> project node and choose Add JBI Module from the pop-up menu. <br>
+The Select Project dialog box opens. </li>
+<li>Select the <tt>SynchronousSample</tt> project and click Add Project JAR Files. <br>
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/addjbinew.png" alt="Adding JBI Module"> </p>
+<br>
+The Select Project dialog box closes. </li>
+<li>In the Projects window, expand the <tt>SynchronousSampleApplication</tt> project node and then expand the <tt>JBI Modules</tt> node. <br>
+Notice that a <tt>SynchronousSample.jar</tt> node has been added. </li>
+</ol>
+<p><b>To deploy the Composite Application: </b></p>
+<ol start="1">
+<li>Right-click the <tt>SynchronousSampleApplication</tt> project node and choose Deploy Project. <br>
+Notice a message similar to the following message appears in the Output window:<br>
+<tt>BUILD SUCCESSFUL (total time: 7 seconds)</tt>.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/build.png" alt="Output window"> </p>
+</li>
+</ol>
+<ol start="2">
+<li>If the Output window is not visible, choose Window &gt; Output.</li>
+</ol>
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19725.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="creatingtestdriver"></a>Creating a Test Drive </h2>
+<p> You can enhance the Composite Application project by adding test cases, binding to the operation, supplying input, and then using the Tester. </p>
+<p><strong>To Add a Test Case: </strong></p>
+<ol>
+<li> In the Projects window, expand the <tt>SynchronousSampleApplication</tt> project node, right-click the <tt>Test</tt> node, and choose New Test Case from the pop-up menu. <br>
+The New Test Case wizard opens. </li>
+<li>For Name, enter: <tt>MyTestcase</tt> and click Next.</li>
+<li>Expand <tt>SynchronousSample - Process Files</tt>, select <tt>SynchronousSample.wsdl</tt> and click Next</li>
+<li>Select <tt>operation1</tt> and click Finish.<br>
+Notice in the project tree, under <tt>Test</tt>, new folder <tt>MyTestcase</tt> is created, containing two files: <tt>Input</tt> and <tt>Output</tt>.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/mytestcasenew.png" alt="MyTestcase"> </p>
+</li>
+<li>Double-click the <tt>Input </tt>and modify its content as follows:
+<ol type="a">
+<li> Locate the following line in the Body contents: <br>
+<tt>&lt;syn:paramA&gt;?string?&lt;syn:paramA&gt; </tt>. </li>
+<li>Replace <tt> ?string?</tt> with <tt>Sherry</tt>.<br>
+The line should look like this: <br>
+<tt>&lt;syn:paramA&gt;Sherry&lt;syn:paramA&gt; </tt>.</li>
+<li>To save your changes, from the IDE's main menu, choose File &gt; Save.</li>
+</ol>
+</li>
+<li>Double-click <tt>Output.xml</tt> to examine its contents.<br>
+Notice that before the test is run this file is empty. <br>
+Each time the test is run, the current output is compared to the contents of <tt>Output</tt>. The Input is copied to <tt>Output</tt> when <tt>Output</tt> is empty . </li>
+</ol>
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19725.html#top">top</a></p>
+<br>
+<!-- ======================================================================================== -->
+<h2><a name="testing"></a>Testing the SynchronousSampleApplication</h2>
+<ol>
+<li> In the Projects window, expand the <tt>SynchronousSampleApplication</tt>, <tt>Test</tt>, and <tt>TestCase0</tt>. <br>
+The <tt>TestCase0 </tt>node contains two XML files: <tt>Input </tt>for input and <tt>Output</tt> for output. <br>
+Each time the test is run, the current output is compared to the content of <tt>Output</tt>.</li>
+<li>Right-click the <tt>TestCase0</tt> project node, and choose Run from the context menu.<br>
+Notice this message in the Output window:
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/test0passed.png" alt="Test passed"> </p>
+</li>
+<li>Right-click the <tt>MyTestcase</tt> node, and choose Run from the context menu. <br>
+This is a special case where the<tt> Output</tt> file is empty and the output is written to <tt>Output</tt>.<br>
+The Overwrite Empty Output? dialog box displays.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/overwrite.png" alt="Overwrite Emplty Output?"> </p>
+</li>
+<li>Click Yes.</li>
+<li> Notice the failed message:
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/mytestfailed.png" alt="MyTestcase failed"> </p>
+</li>
+<li>Repeat step 3.<br>
+After the first run, the <tt>Output.xml</tt> file is no longer empty; its contents are preserved and are not overwritten by the new result.
+<p align="center"> <img src="./A Simple Synchronous BPEL Process_files/mytestpassed.png" alt="MyTestcase passed"> </p>
+</li>
+</ol>
+<div class="feedback-box"><a href="http://www.netbeans.org/about/contact_form.html?to=5&subject=Feedback:%20A%20Simple%20Synchronous%20BPEL%20Process">Send Us Your Feedback</a></div>
+<br style="clear:both;">
+<p align="center"><a href="http://www.javanb.com/netbeans/1/19725.html#top">top</a></p>
+<!-- /Servlet-Specific template -->
+<!-- servlets and anything not on www or testwww -->
+<script src="./A Simple Synchronous BPEL Process_files/urchin" type="text/javascript"></script>
+<script type="text/javascript">
+_uacct = "UA-198771-2";
+urchinTracker();
+</script>
+
+
+ 
+<br>
+<a href="http://www.javanb.com/netbeans/index.html">↑返回目录</a> <br>
+前一篇: <a href="http://www.javanb.com/netbeans/1/19724.html">A NetBeans Platform Sample and Tutorial </a> <br> 
+后一篇: <a href="http://www.javanb.com/netbeans/1/19726.html">Adding Functionality to Buttons: A Beginners Guide </a> 
+
+</div>
+<!-- end: 正文 --> 
+<!-- #EndEditable --> 
+
+<!-- begin: footer --> 
+<div id="footer"><center>
+<a href="http://www.javanb.com/index.html">首页</a> | 
+<a href="http://www.javanb.com/java-sitemap-bd.html">全站 Sitemap</a> | 
+<a href="http://www.javanb.com/contact.html">联系我们</a> | 
+<a href="http://www.javanb.com/netbeans/1/19725.html#" onclick="this.style.behavior=&#39;url(#default#homepage)&#39;;this.setHomePage(&#39;http://www.javanb.com/&#39;);return(false);">设为首页</a> | 
+<a href="http://www.javanb.com/netbeans/1/19725.html#" onclick="window.external.AddFavorite(&#39;http://www.javanb.com/&#39;, &#39;Java 编程资料牛鼻站&#39;);return false;">收藏本站</a> 
+<br>版权所有 Copyright &#169; 2006-2007, Java 编程资料牛鼻站, All rights reserved <br> &nbsp; 
+</center></div>
+<!-- end: footer --> 
+
+
+
+<div id="sbi_camera_button" class="sbi_search" style="left: 0px; top: 0px; position: absolute; width: 29px; height: 27px; border: none; margin: 0px; padding: 0px; z-index: 2147483647; display: none; "></div></body><!-- #EndTemplate --></html>
